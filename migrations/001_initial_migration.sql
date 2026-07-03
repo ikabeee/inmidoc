@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS admins(
 
 CREATE TABLE IF NOT EXISTS tickets (
     ticket_id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    admin_id INT NOT NULL REFERENCES admins(admin_id),
+    admin_id INT NULL REFERENCES admins(admin_id),
     title VARCHAR(255) NOT NULL,
     description TEXT NOT NULL,
     status VARCHAR(50) NOT NULL
