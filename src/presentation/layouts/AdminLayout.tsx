@@ -4,16 +4,13 @@ import type { ReactNode } from "react";
 import { Icon } from "../components/Icon";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: "dashboard" },
-  { href: "#", label: "Expedientes", icon: "folder" },
-  { href: "#", label: "Validación", icon: "shield" },
   { href: "/admin/reports", label: "Reportes", icon: "chart" },
-  { href: "#", label: "Configuración", icon: "settings" },
+  { href: "/admin/procedures", label: "Trámites", icon: "fileText" },
 ] as const;
 
 export function AdminLayout({
   children,
-  active = "Dashboard",
+  active = "Reportes",
 }: {
   children: ReactNode;
   active?: string;
@@ -48,14 +45,9 @@ export function AdminLayout({
             );
           })}
         </nav>
-        <div className="border-t border-(--surface-line) p-4">
-          <Link
-            href="/admin/procedures/new"
-            className="focus-ring flex min-h-12 items-center justify-center gap-2 bg-(--maroon-strong) px-4 text-sm font-bold tracking-[0.05em] text-white hover:bg-(--maroon-dark)"
-          >
-            <Icon name="plus" />
-            Nuevo Trámite
-          </Link>
+        <div className="border-t border-(--surface-line) p-4 text-sm text-(--text-muted)">
+          <p className="font-bold text-(--text-main)">Panel administrativo</p>
+          <p className="mt-1">Reportes y catálogo de trámites.</p>
         </div>
       </aside>
       <div className="md:pl-64">

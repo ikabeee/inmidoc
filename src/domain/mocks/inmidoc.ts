@@ -1,6 +1,6 @@
 import type { ActivityRow, DashboardMetric } from "../entities/dashboard";
 import type { Procedure, ProcedureDocument } from "../entities/procedure";
-import type { ReportTicket } from "../entities/report";
+import type { ReportTicket, UserReportCategory } from "../entities/report";
 
 export const featuredProcedures: Procedure[] = [
   {
@@ -206,5 +206,23 @@ export const reportTickets: ReportTicket[] = [
     priority: "Baja",
     requester: "Administración",
     department: "Usuarios",
+  },
+];
+
+export const userReportCategories: UserReportCategory[] = [
+  {
+    id: "portal",
+    label: "Problema con el portal",
+    description: "Errores, lentitud, enlaces rotos o imposibilidad de cargar documentos.",
+  },
+  {
+    id: "procedure",
+    label: "Duda sobre un trámite",
+    description: "Información incompleta, requisitos confusos o datos institucionales inconsistentes.",
+  },
+  {
+    id: "document",
+    label: "Validación documental",
+    description: "Problemas para revisar, descargar o validar documentos requeridos.",
   },
 ];

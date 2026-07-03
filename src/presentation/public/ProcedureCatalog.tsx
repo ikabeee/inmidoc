@@ -27,30 +27,16 @@ export function ProcedureCatalog({
               ))}
             </select>
           </label>
-          <div className="mt-5">
-            <p className="text-sm font-bold tracking-[0.05em]">Categoría</p>
-            <div className="mt-3 grid gap-3">
-              {filters.categories.map((category) => (
-                <label key={category} className="flex items-center gap-3 text-sm text-(--text-muted)">
-                  <input className="h-4 w-4 border-(--gold-light)" type="checkbox" />
-                  {category}
-                </label>
-              ))}
-            </div>
-          </div>
+
         </div>
       </aside>
       <div className="md:col-span-8">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h2 className="brand-serif text-3xl font-semibold text-(--text-main)">Trámites Destacados</h2>
-          <span className="text-sm text-(--text-muted)">Mostrando 4 resultados</span>
         </div>
         <article className="institutional-card gold-rule-top flex flex-col gap-5 p-5 md:flex-row">
           <div className="flex-1">
             <div className="flex items-start justify-between gap-3">
-              <span className="bg-(--gold) px-3 py-1 text-xs font-bold uppercase tracking-[0.08em] text-white">
-                Destacado
-              </span>
               <span className="flex items-center gap-1 text-xs font-bold text-(--text-muted)">
                 <Icon name="landmark" size={16} />
                 {featured.institution}

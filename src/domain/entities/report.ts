@@ -10,3 +10,9 @@ export type ReportTicket = {
   requester: string;
   department: string;
 };
+
+export type UserReportCategory = {
+  id: string;
+  label: string;
+  description: string;
+};

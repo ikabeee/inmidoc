@@ -2,7 +2,6 @@ import Link from "next/link";
 
 import type { Procedure, ProcedureDocument } from "@/src/domain/entities/procedure";
 
-import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 
 export function ProcedureDetailView({
@@ -20,7 +19,7 @@ export function ProcedureDetailView({
         <div className="shell-container py-8">
           <div className="mt-2 grid gap-8 lg:grid-cols-[1fr_320px] lg:items-start">
             <div>
-              <div className="inline-flex items-center gap-2 border border-(--gold-light) bg-(--surface-muted) px-3 py-2 text-xs font-bold uppercase tracking-[0.1em] text-(--maroon-strong)">
+              <div className="inline-flex items-center gap-2 border border-(--gold-light) bg-(--surface-muted) px-3 py-2 text-xs font-bold uppercase tracking-widest text-(--maroon-strong)">
                 <Icon name="landmark" size={16} />
                 {procedure.institution}
               </div>
@@ -92,41 +91,9 @@ export function ProcedureDetailView({
               ))}
             </div>
           </article>
-
-          <article className="institutional-card p-6">
-            <h2 className="brand-serif text-3xl font-semibold text-(--maroon)">Proceso del trámite</h2>
-            <ol className="mt-6 grid gap-4">
-              {procedure.steps.map((step, index) => (
-                <li key={step} className="grid gap-4 border-l-4 border-(--gold-light) bg-white p-4 sm:grid-cols-[48px_1fr]">
-                  <span className="flex h-12 w-12 items-center justify-center bg-(--maroon) font-bold text-white">
-                    {index + 1}
-                  </span>
-                  <p className="self-center leading-7 text-(--text-muted)">{step}</p>
-                </li>
-              ))}
-            </ol>
-          </article>
         </div>
 
         <aside className="grid content-start gap-6">
-          <section className="institutional-card p-6">
-            <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Disponibilidad</h2>
-            <div className="mt-5 flex items-start gap-3">
-              <Icon name="checkCircle" className="mt-0.5 text-[#795926]" />
-              <p className="leading-7 text-(--text-muted)">{procedure.availability}</p>
-            </div>
-            <div className="mt-6 flex flex-wrap gap-2">
-              {procedure.keywords.map((keyword) => (
-                <span
-                  key={keyword}
-                  className="border border-(--surface-line) bg-(--surface-muted) px-3 py-1 text-xs font-bold text-(--maroon-strong)"
-                >
-                  {keyword}
-                </span>
-              ))}
-            </div>
-          </section>
-
           <section className="institutional-card p-6">
             <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Trámites relacionados</h2>
             <div className="mt-5 grid gap-4">

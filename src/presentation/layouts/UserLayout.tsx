@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import Image from 'next/image'
+import Image from "next/image";
 
 export function UserLayout({ children }: { children: ReactNode }) {
   return (
@@ -22,17 +22,11 @@ export function UserLayout({ children }: { children: ReactNode }) {
             </Link>
             <Link
               className="border-b-2 border-(--gold-light) pb-1"
-              href="/"
+              href="/reportes"
             >
               Haz tu reporte
             </Link>
           </nav>
-          <Link
-            href="/login"
-            className="focus-ring bg-white/10 px-4 py-2 text-sm font-bold tracking-[0.05em] hover:bg-white/15"
-          >
-            Iniciar Sesión
-          </Link>
         </div>
       </header>
       <main className="flex-1">{children}</main>
