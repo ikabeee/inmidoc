@@ -4,9 +4,9 @@ import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 
 function metricTone(tone: DashboardMetric["tone"]) {
-  if (tone === "maroon") return "border-t-[var(--maroon-strong)] bg-[#fff5f7]";
-  if (tone === "gold") return "border-t-[var(--gold-light)] bg-white";
-  return "border-t-[var(--surface-line)] bg-white";
+  if (tone === "maroon") return "border-t-(--maroon-strong) bg-[#fff5f7]";
+  if (tone === "gold") return "border-t-(--gold-light) bg-white";
+  return "border-t-(--surface-line) bg-white";
 }
 
 function statusClass(status: string) {
@@ -20,8 +20,8 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-10 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
-          <h1 className="brand-serif text-5xl font-bold text-[var(--maroon)]">Visión General</h1>
-          <p className="mt-4 text-xl text-[var(--text-muted)]">Resumen del estado actual del sistema INMIDOC.</p>
+          <h1 className="brand-serif text-5xl font-bold text-(--maroon)">Visión General</h1>
+          <p className="mt-4 text-xl text-(--text-muted)">Resumen del estado actual del sistema INMIDOC.</p>
         </div>
         <div className="flex flex-wrap gap-4">
           <Button variant="secondary">Ver Reportes</Button>
@@ -39,7 +39,7 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
                 <p className="text-sm font-bold uppercase tracking-[0.08em]">{metric.label}</p>
                 <p className="brand-serif mt-4 text-5xl font-bold">{metric.value}</p>
               </div>
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--surface-muted)] text-3xl text-[var(--maroon-strong)]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-(--surface-muted) text-3xl text-(--maroon-strong)">
                 <Icon name={metric.icon} size={30} />
               </div>
             </div>
@@ -49,15 +49,15 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
       </section>
       <section className="mt-8 grid gap-8 lg:grid-cols-[1fr_360px]">
         <div className="institutional-card overflow-hidden">
-          <div className="flex items-center justify-between border-b border-[var(--surface-line)] p-6">
-            <h2 className="brand-serif text-3xl font-semibold text-[var(--maroon)]">Actividad Reciente</h2>
+          <div className="flex items-center justify-between border-b border-(--surface-line) p-6">
+            <h2 className="brand-serif text-3xl font-semibold text-(--maroon)">Actividad Reciente</h2>
             <button className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-[#6f4308]">
               Ver todo <Icon name="arrowRight" size={16} />
             </button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] border-collapse text-left">
-              <thead className="bg-[var(--surface-muted)] text-xs uppercase tracking-[0.12em] text-[var(--text-muted)]">
+              <thead className="bg-(--surface-muted) text-xs uppercase tracking-[0.12em] text-(--text-muted)">
                 <tr>
                   <th className="p-5">Folio</th>
                   <th className="p-5">Trámite</th>
@@ -68,8 +68,8 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
               </thead>
               <tbody>
                 {activityRows.map((row) => (
-                  <tr key={row.folio} className="border-t border-[var(--surface-line)] even:bg-[var(--surface-muted)]/50">
-                    <td className="p-5 font-bold text-[var(--maroon-strong)]">{row.folio}</td>
+                  <tr key={row.folio} className="border-t border-(--surface-line) even:bg-(--surface-muted)/50">
+                    <td className="p-5 font-bold text-(--maroon-strong)">{row.folio}</td>
                     <td className="p-5">{row.procedure}</td>
                     <td className="p-5">{row.requester}</td>
                     <td className="p-5">
@@ -91,7 +91,7 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
               <p className="text-sm font-bold uppercase tracking-[0.08em]">Tiempo promedio</p>
               <p className="brand-serif mt-2 text-3xl font-bold">2.4 Días</p>
             </div>
-            <div className="border-t border-[var(--surface-line)] pt-8">
+            <div className="border-t border-(--surface-line) pt-8">
               <p className="text-sm font-bold uppercase tracking-[0.08em]">Tasa de aprobación</p>
               <p className="brand-serif mt-2 text-3xl font-bold">94.2%</p>
             </div>

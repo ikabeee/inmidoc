@@ -6,10 +6,10 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const variantClass = {
-  primary: "bg-[var(--maroon-strong)] text-white border border-[var(--maroon-strong)] hover:bg-[var(--maroon-dark)]",
+  primary: "bg-(--maroon-strong) text-white border border-(--maroon-strong) hover:bg-(--maroon-dark)",
   secondary: "bg-[#795926] text-white border border-[#795926] hover:bg-[#5e4110]",
-  outline: "bg-transparent text-[var(--maroon-strong)] border border-[var(--gold-light)] hover:bg-[var(--surface-muted)]",
-  ghost: "bg-transparent text-[var(--maroon-strong)] border border-transparent hover:underline",
+  outline: "bg-transparent text-(--maroon-strong) border border-(--gold-light) hover:bg-(--surface-muted)",
+  ghost: "bg-transparent text-(--maroon-strong) border border-transparent hover:underline",
 };
 
 export function Button({ variant = "primary", className = "", children, ...props }: ButtonProps) {

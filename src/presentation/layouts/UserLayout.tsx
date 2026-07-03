@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 export function UserLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[var(--surface)] text-[var(--text-main)]">
-      <header className="sticky top-0 z-50 bg-[var(--maroon)] text-white">
+    <div className="flex min-h-screen flex-col bg-(--surface) text-(--text-main)">
+      <header className="sticky top-0 z-50 bg-(--maroon) text-white">
         <div className="shell-container flex h-16 items-center justify-between">
           <Link
             href="/"
@@ -15,13 +15,13 @@ export function UserLayout({ children }: { children: ReactNode }) {
           </Link>
           <nav className="hidden items-center gap-8 text-sm font-bold tracking-[0.05em] md:flex">
             <Link
-              className="border-b-2 border-[var(--gold-light)] pb-1"
+              className="border-b-2 border-(--gold-light) pb-1"
               href="/"
             >
               Trámites
             </Link>
             <Link
-              className="border-b-2 border-[var(--gold-light)] pb-1"
+              className="border-b-2 border-(--gold-light) pb-1"
               href="/"
             >
               Haz tu reporte
@@ -36,7 +36,7 @@ export function UserLayout({ children }: { children: ReactNode }) {
         </div>
       </header>
       <main className="flex-1">{children}</main>
-      <footer className="border-t-4 border-[var(--gold)] bg-[var(--maroon)] py-8 text-white">
+      <footer className="border-t-4 border-(--gold) bg-(--maroon) py-8 text-white">
         <div className="shell-container flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="text-sm font-bold">

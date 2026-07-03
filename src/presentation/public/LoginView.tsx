@@ -7,26 +7,26 @@ export function LoginView() {
       <div className="institutional-card gold-rule-top w-full max-w-md p-8 md:p-10">
         <div className="text-center">
           <h1 className="brand-serif text-4xl font-bold">Iniciar Sesión</h1>
-          <p className="mt-3 text-[var(--text-muted)]">Acceso administrativo INMIDOC</p>
+          <p className="mt-3 text-(--text-muted)">Acceso administrativo INMIDOC</p>
         </div>
         <form className="mt-8 grid gap-5">
           <label className="grid gap-2 text-sm font-bold tracking-[0.05em]">
-            Correo Electrónico <span className="text-[var(--maroon)]">*</span>
+            Correo Electrónico <span className="text-(--maroon)">*</span>
             <span className="relative">
-              <Icon name="mail" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]" />
+              <Icon name="mail" className="absolute left-3 top-1/2 -translate-y-1/2 text-(--outline)" />
               <input
-                className="focus-ring h-14 w-full border border-[var(--gold-light)] pl-10 pr-4 font-normal tracking-0"
+                className="focus-ring h-14 w-full border border-(--gold-light) pl-10 pr-4 font-normal tracking-0"
                 placeholder="usuario@inmidoc.gob.mx"
                 type="email"
               />
             </span>
           </label>
           <label className="grid gap-2 text-sm font-bold tracking-[0.05em]">
-            Contraseña <span className="text-[var(--maroon)]">*</span>
+            Contraseña <span className="text-(--maroon)">*</span>
             <span className="relative">
-              <Icon name="lock" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]" />
+              <Icon name="lock" className="absolute left-3 top-1/2 -translate-y-1/2 text-(--outline)" />
               <input
-                className="focus-ring h-14 w-full border border-[var(--gold-light)] pl-10 pr-4 font-normal tracking-0"
+                className="focus-ring h-14 w-full border border-(--gold-light) pl-10 pr-4 font-normal tracking-0"
                 placeholder="••••••••"
                 type="password"
               />
@@ -38,7 +38,7 @@ export function LoginView() {
           <Button className="w-full" type="button">
             Ingresar al Sistema <Icon name="login" />
           </Button>
-          <div className="mt-2 flex gap-4 border border-[var(--surface-line)] bg-[var(--surface-muted)] p-4 text-sm leading-6 text-[var(--text-muted)]">
+          <div className="mt-2 flex gap-4 border border-(--surface-line) bg-(--surface-muted) p-4 text-sm leading-6 text-(--text-muted)">
             <Icon name="info" className="mt-0.5 text-[#795926]" />
             <p>
               Este es un sistema de uso restringido para personal autorizado del Gobierno de México. El acceso no autorizado será sancionado.
