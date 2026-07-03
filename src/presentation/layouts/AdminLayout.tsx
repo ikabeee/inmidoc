@@ -4,12 +4,12 @@ import type { ReactNode } from "react";
 import { Icon } from "../components/Icon";
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: "▦" },
-  { href: "#", label: "Expedientes", icon: "▤" },
-  { href: "#", label: "Validación", icon: "◇" },
-  { href: "/admin/reports", label: "Reportes", icon: "▥" },
-  { href: "#", label: "Configuración", icon: "⚙" },
-];
+  { href: "/admin", label: "Dashboard", icon: "dashboard" },
+  { href: "#", label: "Expedientes", icon: "folder" },
+  { href: "#", label: "Validación", icon: "shield" },
+  { href: "/admin/reports", label: "Reportes", icon: "chart" },
+  { href: "#", label: "Configuración", icon: "settings" },
+] as const;
 
 export function AdminLayout({
   children,
@@ -42,7 +42,7 @@ export function AdminLayout({
                     : "border-transparent text-[var(--text-muted)] hover:bg-[var(--surface-muted)]"
                 }`}
               >
-                <Icon>{item.icon}</Icon>
+                <Icon name={item.icon} />
                 {item.label}
               </Link>
             );
@@ -53,7 +53,7 @@ export function AdminLayout({
             href="/admin/procedures/new"
             className="focus-ring flex min-h-12 items-center justify-center gap-2 bg-[var(--maroon-strong)] px-4 text-sm font-bold tracking-[0.05em] text-white hover:bg-[var(--maroon-dark)]"
           >
-            <Icon>＋</Icon>
+            <Icon name="plus" />
             Nuevo Trámite
           </Link>
         </div>

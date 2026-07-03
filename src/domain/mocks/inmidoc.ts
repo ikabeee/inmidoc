@@ -6,39 +6,88 @@ export const featuredProcedures: Procedure[] = [
   {
     id: "curp",
     institution: "SEGOB",
+    institutionName: "Secretaría de Gobernación",
     title: "Consulta e impresión de la CURP",
     description:
       "Obtén tu Clave Única de Registro de Población de manera gratuita y en línea. Documento indispensable para trámites oficiales en México.",
+    detail:
+      "Permite consultar, descargar e imprimir la constancia CURP certificada para usarla en trámites escolares, laborales, fiscales, migratorios y de identidad.",
+    cost: "Gratuito",
+    estimatedTime: "Entrega inmediata",
+    modality: "En línea",
+    availability: "Disponible 24/7",
+    steps: ["Captura tus datos personales o CURP.", "Valida coincidencias en el registro nacional.", "Descarga la constancia en PDF."],
+    keywords: ["CURP", "identidad", "registro", "constancia"],
     featured: true,
-    icon: "▣",
+    icon: "idCard",
   },
   {
     id: "constancia-fiscal",
     institution: "SAT",
+    institutionName: "Servicio de Administración Tributaria",
     title: "Constancia de Situación Fiscal",
     description:
       "Genera tu constancia con Cédula de Identificación Fiscal. Conoce tu régimen y obligaciones fiscales registradas.",
+    detail:
+      "Documento oficial que concentra RFC, domicilio fiscal, régimen tributario y obligaciones registradas ante la autoridad fiscal.",
+    cost: "Gratuito",
+    estimatedTime: "Entrega inmediata",
+    modality: "En línea",
+    availability: "Disponible con RFC activo",
+    steps: ["Ingresa con RFC y credenciales fiscales.", "Confirma datos fiscales registrados.", "Genera y descarga la constancia."],
+    keywords: ["RFC", "SAT", "constancia", "fiscal"],
+    icon: "fileText",
   },
   {
     id: "nss",
     institution: "IMSS",
+    institutionName: "Instituto Mexicano del Seguro Social",
     title: "Asignación de Número de Seguridad Social (NSS)",
     description:
       "Solicita o localiza tu NSS. Es único, permanente e intransferible. Necesario para cotizar en el seguro social.",
+    detail:
+      "Consulta o asigna el Número de Seguridad Social requerido para alta laboral, acceso a servicios médicos y registro de cotizaciones.",
+    cost: "Gratuito",
+    estimatedTime: "Entrega inmediata",
+    modality: "En línea",
+    availability: "Disponible con CURP y correo electrónico",
+    steps: ["Captura CURP y correo electrónico.", "Verifica identidad del solicitante.", "Recibe NSS y comprobante digital."],
+    keywords: ["IMSS", "NSS", "seguridad social", "empleo"],
+    icon: "shield",
   },
   {
     id: "pasaporte",
     institution: "SRE",
+    institutionName: "Secretaría de Relaciones Exteriores",
     title: "Cita para Pasaporte",
     description:
       "Programa tu cita en línea para el trámite de expedición de pasaporte ordinario mexicano.",
+    detail:
+      "Permite agendar atención presencial para expedición o renovación de pasaporte ordinario, con selección de oficina y horario disponible.",
+    cost: "Variable según vigencia",
+    estimatedTime: "De 1 a 3 días hábiles",
+    modality: "Cita presencial",
+    availability: "Sujeto a disponibilidad por oficina",
+    steps: ["Selecciona oficina y horario.", "Registra datos del solicitante.", "Presenta documentos y pago el día de la cita."],
+    keywords: ["SRE", "pasaporte", "cita", "viaje"],
+    icon: "calendar",
   },
   {
     id: "cedula",
     institution: "SEP",
+    institutionName: "Secretaría de Educación Pública",
     title: "Consulta de Cédula Profesional",
     description:
       "Verifica la autenticidad y validez de las cédulas profesionales emitidas por la Dirección General de Profesiones.",
+    detail:
+      "Consulta pública para verificar cédulas profesionales, nombre del titular, institución educativa y profesión registrada.",
+    cost: "Gratuito",
+    estimatedTime: "Entrega inmediata",
+    modality: "En línea",
+    availability: "Consulta pública",
+    steps: ["Captura nombre o número de cédula.", "Revisa coincidencias oficiales.", "Consulta detalle de la cédula registrada."],
+    keywords: ["SEP", "cédula", "profesional", "validación"],
+    icon: "badgeCheck",
   },
 ];
 
@@ -57,21 +106,21 @@ export const dashboardMetrics: DashboardMetric[] = [
     value: "14,592",
     note: "+12% desde el mes pasado",
     tone: "gold",
-    icon: "□",
+    icon: "fileText",
   },
   {
     label: "Tickets activos",
     value: "843",
     note: "45 requieren atención inmediata",
     tone: "maroon",
-    icon: "▤",
+    icon: "ticket",
   },
   {
     label: "Instituciones enlazadas",
     value: "128",
     note: "85% Cobertura Nacional",
     tone: "neutral",
-    icon: "▥",
+    icon: "building",
   },
 ];
 

@@ -1,6 +1,7 @@
 import type { ProcedureDocument } from "@/src/domain/entities/procedure";
 
 import { Button } from "../components/Button";
+import { Icon } from "../components/Icon";
 
 export function ProcedureFormView({
   institutions,
@@ -46,7 +47,10 @@ export function ProcedureFormView({
           <section className="institutional-card p-6">
             <div className="flex items-center justify-between gap-4 border-b border-[var(--surface-line)] pb-4">
               <h2 className="brand-serif text-2xl font-semibold">Documentos Requeridos</h2>
-              <button className="text-sm font-bold text-[var(--maroon-strong)]">⊕ Agregar Documento</button>
+              <button className="inline-flex items-center gap-2 text-sm font-bold text-[var(--maroon-strong)]">
+                <Icon name="circlePlus" size={16} />
+                Agregar Documento
+              </button>
             </div>
             <p className="mt-5 text-sm text-[var(--text-muted)]">
               Añada los requisitos documentales necesarios para la ejecución de este trámite.
@@ -66,7 +70,7 @@ export function ProcedureFormView({
                   </select>
                 </label>
                 <button className="self-end text-2xl text-[var(--danger)]" aria-label="Eliminar documento">
-                  □
+                  <Icon name="trash" />
                 </button>
                 <label className="flex items-center gap-2 text-sm md:col-span-3">
                   <input type="checkbox" defaultChecked={document.required} />

@@ -11,7 +11,7 @@ export function SearchHero({ frequentSearches }: { frequentSearches: string[] })
       <div className="mx-auto mt-8 flex max-w-3xl flex-col gap-3 sm:flex-row">
         <label className="relative flex-1">
           <span className="sr-only">Buscar trámite</span>
-          <Icon className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]">⌕</Icon>
+          <Icon name="search" className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--text-muted)]" />
           <input
             className="focus-ring h-14 w-full border border-[var(--gold-light)] bg-white pl-12 pr-4 text-base text-[var(--text-main)] placeholder:text-slate-500"
             placeholder="Ej. CURP, Pasaporte, Cédula Profesional..."
@@ -19,7 +19,7 @@ export function SearchHero({ frequentSearches }: { frequentSearches: string[] })
         </label>
         <Button className="h-14 px-8">
           Buscar
-          <Icon>→</Icon>
+          <Icon name="arrowRight" />
         </Button>
       </div>
       <div className="mt-7 flex flex-wrap items-center justify-center gap-3">

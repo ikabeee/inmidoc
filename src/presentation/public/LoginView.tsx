@@ -13,7 +13,7 @@ export function LoginView() {
           <label className="grid gap-2 text-sm font-bold tracking-[0.05em]">
             Correo Electrónico <span className="text-[var(--maroon)]">*</span>
             <span className="relative">
-              <Icon className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]">✉</Icon>
+              <Icon name="mail" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]" />
               <input
                 className="focus-ring h-14 w-full border border-[var(--gold-light)] pl-10 pr-4 font-normal tracking-0"
                 placeholder="usuario@inmidoc.gob.mx"
@@ -24,7 +24,7 @@ export function LoginView() {
           <label className="grid gap-2 text-sm font-bold tracking-[0.05em]">
             Contraseña <span className="text-[var(--maroon)]">*</span>
             <span className="relative">
-              <Icon className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]">▣</Icon>
+              <Icon name="lock" className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--outline)]" />
               <input
                 className="focus-ring h-14 w-full border border-[var(--gold-light)] pl-10 pr-4 font-normal tracking-0"
                 placeholder="••••••••"
@@ -36,10 +36,10 @@ export function LoginView() {
             ¿Olvidaste tu contraseña?
           </a>
           <Button className="w-full" type="button">
-            Ingresar al Sistema <Icon>↪</Icon>
+            Ingresar al Sistema <Icon name="login" />
           </Button>
           <div className="mt-2 flex gap-4 border border-[var(--surface-line)] bg-[var(--surface-muted)] p-4 text-sm leading-6 text-[var(--text-muted)]">
-            <Icon className="mt-0.5 text-[#795926]">ⓘ</Icon>
+            <Icon name="info" className="mt-0.5 text-[#795926]" />
             <p>
               Este es un sistema de uso restringido para personal autorizado del Gobierno de México. El acceso no autorizado será sancionado.
             </p>

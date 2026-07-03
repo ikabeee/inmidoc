@@ -1,6 +1,6 @@
 import type { Procedure } from "@/src/domain/entities/procedure";
+import Link from "next/link";
 
-import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 
 export function ProcedureCatalog({
@@ -52,33 +52,41 @@ export function ProcedureCatalog({
                 Destacado
               </span>
               <span className="flex items-center gap-1 text-xs font-bold text-[var(--text-muted)]">
-                <Icon>▥</Icon>
+                <Icon name="landmark" size={16} />
                 {featured.institution}
               </span>
             </div>
             <h3 className="brand-serif mt-5 text-3xl font-semibold text-[var(--maroon-strong)]">{featured.title}</h3>
             <p className="mt-3 line-clamp-2 text-[var(--text-muted)]">{featured.description}</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button variant="outline">Ver Detalles</Button>
+              <Link
+                href={`/tramites/${featured.id}`}
+                className="focus-ring inline-flex min-h-11 items-center justify-center gap-2 border border-[var(--gold-light)] bg-transparent px-5 py-2 text-sm font-bold tracking-[0.05em] text-[var(--maroon-strong)] transition-colors hover:bg-[var(--surface-muted)]"
+              >
+                Ver Detalles <Icon name="arrowRight" size={18} />
+              </Link>
             </div>
           </div>
           <div className="hidden w-48 items-center justify-center bg-[var(--surface-muted)] text-6xl text-[var(--gold-light)] md:flex">
-            {featured.icon}
+            <Icon name={featured.icon ?? "fileText"} size={64} strokeWidth={1.5} />
           </div>
         </article>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
           {standard.map((procedure) => (
             <article key={procedure.id} className="institutional-card flex min-h-60 flex-col p-5">
               <span className="flex items-center gap-1 text-xs font-bold text-[var(--text-muted)]">
-                <Icon>▥</Icon>
+                <Icon name="landmark" size={16} />
                 {procedure.institution}
               </span>
               <h3 className="brand-serif mt-5 text-2xl font-semibold">{procedure.title}</h3>
               <p className="mt-3 line-clamp-3 flex-1 text-sm leading-6 text-[var(--text-muted)]">{procedure.description}</p>
               <div className="mt-5 border-t border-[var(--surface-line)] pt-4 text-right">
-                <button className="focus-ring text-sm font-bold tracking-[0.05em] text-[var(--maroon-strong)] hover:underline">
-                  Ir al trámite →
-                </button>
+                <Link
+                  href={`/tramites/${procedure.id}`}
+                  className="focus-ring inline-flex items-center gap-2 text-sm font-bold tracking-[0.05em] text-[var(--maroon-strong)] hover:underline"
+                >
+                  Ir al trámite <Icon name="arrowRight" size={16} />
+                </Link>
               </div>
             </article>
           ))}

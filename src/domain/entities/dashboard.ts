@@ -3,7 +3,7 @@ export type DashboardMetric = {
   value: string;
   note: string;
   tone: "gold" | "maroon" | "neutral";
-  icon: string;
+  icon: "fileText" | "ticket" | "building";
 };
 
 export type ActivityRow = {

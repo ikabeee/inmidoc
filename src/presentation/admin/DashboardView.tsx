@@ -26,7 +26,7 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
         <div className="flex flex-wrap gap-4">
           <Button variant="secondary">Ver Reportes</Button>
           <Button>
-            <Icon>⊕</Icon>
+            <Icon name="circlePlus" />
             Agregar Trámite
           </Button>
         </div>
@@ -40,7 +40,7 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
                 <p className="brand-serif mt-4 text-5xl font-bold">{metric.value}</p>
               </div>
               <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--surface-muted)] text-3xl text-[var(--maroon-strong)]">
-                {metric.icon}
+                <Icon name={metric.icon} size={30} />
               </div>
             </div>
             <p className="mt-7 text-sm font-bold text-[#6f4308]">{metric.note}</p>
@@ -51,7 +51,9 @@ export function DashboardView({ metrics, activityRows }: { metrics: DashboardMet
         <div className="institutional-card overflow-hidden">
           <div className="flex items-center justify-between border-b border-[var(--surface-line)] p-6">
             <h2 className="brand-serif text-3xl font-semibold text-[var(--maroon)]">Actividad Reciente</h2>
-            <button className="text-sm font-bold uppercase tracking-[0.1em] text-[#6f4308]">Ver todo →</button>
+            <button className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.1em] text-[#6f4308]">
+              Ver todo <Icon name="arrowRight" size={16} />
+            </button>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] border-collapse text-left">

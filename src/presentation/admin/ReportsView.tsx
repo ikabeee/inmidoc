@@ -18,7 +18,7 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
           <p className="mt-3 text-lg text-[var(--text-muted)]">Gestión y seguimiento de tickets ciudadanos e internos.</p>
         </div>
         <label className="institutional-card flex h-14 items-center gap-3 px-5">
-          <Icon>≡</Icon>
+          <Icon name="filter" />
           <select className="focus-ring border-0 bg-transparent font-bold">
             <option>Todos los estados</option>
             <option>Pendiente</option>
@@ -57,7 +57,9 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
                     <td className="p-5">
                       <span className={`inline-block px-3 py-2 text-sm ${statusClass(ticket.status)}`}>{ticket.status}</span>
                     </td>
-                    <td className="p-5 text-right">›</td>
+                    <td className="p-5 text-right">
+                      <Icon name="chevronRight" />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -99,7 +101,10 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
               </div>
               <div>
                 <p className="font-bold">Prioridad</p>
-                <p className="mt-2 font-bold text-[var(--danger)]">! {selectedTicket.priority}</p>
+                <p className="mt-2 inline-flex items-center gap-2 font-bold text-[var(--danger)]">
+                  <Icon name="alert" size={16} />
+                  {selectedTicket.priority}
+                </p>
               </div>
               <div>
                 <p className="font-bold">Reportado por</p>
