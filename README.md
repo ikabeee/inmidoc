@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inmidoc
 
-## Getting Started
+Aplicacion web de tramites construida con Next.js 16, React 19, TypeScript, Tailwind CSS y Supabase.
 
-First, run the development server:
+## Requisitos
+
+- Node.js 20.9 o superior.
+- npm.
+- Un proyecto de Supabase con las tablas del folder `migrations/`.
+
+## Configuracion inicial
+
+Instala las dependencias:
+
+```bash
+npm ci
+```
+
+Crea el archivo de variables de entorno:
+
+```bash
+cp .env.example .env
+```
+
+Completa los valores en `.env`:
+
+```bash
+SUPABASE_URL=https://tu-proyecto.supabase.co
+SUPABASE_SECRET_KEY=tu-service-role-o-secret-key
+AUTH_SECRET=una-cadena-larga-y-secreta
+```
+
+`AUTH_SECRET` se usa para firmar la sesion de administrador. Si no se define, la app usa `SUPABASE_SECRET_KEY` como respaldo, pero es mejor configurarlo por separado.
+
+## Base de datos
+
+Aplica las migraciones de Supabase en este orden:
+
+1. `migrations/001_initial_migration.sql`
+2. `migrations/002_database_backfill.sql`
+
+Puedes ejecutarlas desde el SQL Editor de Supabase o con la herramienta que uses para conectarte a Postgres. La segunda migracion inserta datos iniciales para instituciones, tramites, documentos requeridos, administradores y tickets.
+
+## Desarrollo
+
+Arranca el servidor local:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre `http://localhost:3000` en el navegador.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Rutas principales:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/`: catalogo publico de tramites.
+- `/login`: inicio de sesion de administradores.
+- `/admin`: panel de administracion.
+- `/admin/procedures`: gestion de tramites.
+- `/admin/reports`: reportes.
 
-## Learn More
+## Comandos disponibles
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Inicia Next.js en modo desarrollo.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run lint
+```
 
-## Deploy on Vercel
+Ejecuta ESLint.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Genera el build de produccion.
+
+```bash
+npm run start
+```
+
+Levanta el servidor de produccion despues de correr `npm run build`.
+
+## Flujo recomendado
+
+```bash
+npm ci
+cp .env.example .env
+# editar .env
+# aplicar migraciones en Supabase
+npm run dev
+```
+
+Antes de publicar cambios:
+
+```bash
+npm run lint
+npm run build
+```
