@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nuevo Trámite - INMIDOC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Source+Serif+4:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#241a03",
+                      "border-subtle": "#E0E0E0",
+                      "surface-gray": "#F5F5F5",
+                      "surface-container-low": "#f3f3f3",
+                      "primary-fixed": "#ffd9de",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-surface": "#2f3131",
+                      "on-primary-fixed-variant": "#7b2a3f",
+                      "on-surface-variant": "#544245",
+                      "on-tertiary": "#ffffff",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#524529",
+                      "on-primary-fixed": "#3f0016",
+                      "on-primary-container": "#eb8399",
+                      "background": "#f9f9f9",
+                      "tertiary-container": "#43371c",
+                      "primary-container": "#691c32",
+                      "tertiary": "#2c2208",
+                      "on-secondary-container": "#7a5926",
+                      "secondary": "#795926",
+                      "on-tertiary-container": "#b2a07d",
+                      "tertiary-fixed-dim": "#d8c49f",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#ffd395",
+                      "outline": "#877275",
+                      "tertiary-fixed": "#f5e0ba",
+                      "surface-bright": "#f9f9f9",
+                      "outline-variant": "#d9c0c4",
+                      "gob-maroon-dark": "#611232",
+                      "secondary-fixed": "#ffddb1",
+                      "text-main": "#212121",
+                      "inverse-primary": "#ffb1bf",
+                      "surface-container-high": "#e8e8e8",
+                      "surface-dim": "#dadada",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed-variant": "#5e4110",
+                      "surface-variant": "#e2e2e2",
+                      "secondary-fixed-dim": "#eac083",
+                      "primary": "#4c041d",
+                      "error-container": "#ffdad6",
+                      "surface-container": "#eeeeee",
+                      "primary-fixed-dim": "#ffb1bf",
+                      "surface-container-highest": "#e2e2e2",
+                      "on-error-container": "#93000a",
+                      "on-background": "#1a1c1c",
+                      "surface-tint": "#994157",
+                      "inverse-on-surface": "#f1f1f1",
+                      "gob-gold-light": "#D4C19C",
+                      "error": "#ba1a1a",
+                      "on-surface": "#1a1c1c",
+                      "on-secondary-fixed": "#291800",
+                      "surface": "#f9f9f9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "unit": "8px",
+                      "stack-lg": "32px",
+                      "stack-sm": "8px",
+                      "stack-md": "16px",
+                      "margin-desktop": "40px",
+                      "margin-mobile": "16px"
+              },
+              "fontFamily": {
+                      "body-lg": [
+                              "montserrat"
+                      ],
+                      "headline-lg-mobile": [
+                              "sourceSerif4"
+                      ],
+                      "headline-lg": [
+                              "sourceSerif4"
+                      ],
+                      "headline-sm": [
+                              "sourceSerif4"
+                      ],
+                      "body-sm": [
+                              "montserrat"
+                      ],
+                      "body-md": [
+                              "montserrat"
+                      ],
+                      "headline-md": [
+                              "sourceSerif4"
+                      ],
+                      "label-lg": [
+                              "montserrat"
+                      ],
+                      "display-lg": [
+                              "sourceSerif4"
+                      ],
+                      "label-md": [
+                              "montserrat"
+                      ]
+              },
+              "fontSize": {
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "28px",
+                              {
+                                      "lineHeight": "36px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-sm": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-lg": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+    </script>
+<style>
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #611232;
+            border-width: 2px;
+            box-shadow: none;
+        }
+        .form-input, .form-textarea, .form-select {
+            border-color: #D4C19C;
+            border-width: 1px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md h-full flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-primary dark:bg-gob-maroon-dark text-on-primary dark:text-white docked full-width top-0 z-50 flat no shadows flex justify-between items-center w-full px-margin-desktop max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-6">
+<span class="font-headline-md text-headline-md font-bold text-white">INMIDOC</span>
+<nav class="hidden md:flex gap-6 h-full">
+<a class="text-white font-bold border-b-2 border-gob-gold-light pb-1 h-full flex items-center pt-1 font-label-lg text-label-lg" href="#">Trámites</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200 h-full flex items-center" href="#">Gobierno</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200 h-full flex items-center" href="#">Participa</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200 h-full flex items-center" href="#">Datos</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 hover:text-gob-gold-light transition-colors duration-200 font-label-lg text-label-lg">
+                Iniciar Sesión
+            </button>
+<span class="material-symbols-outlined cursor-pointer hover:text-gob-gold-light" data-icon="search" data-weight="fill" style="font-variation-settings: 'FILL' 1;">search</span>
+</div>
+</header>
+<div class="flex flex-1 pt-16">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flat no shadows fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40">
+<div class="p-6 border-b border-border-subtle">
+<h2 class="font-headline-sm text-headline-sm font-semibold text-primary">Panel INMIDOC</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Administración Central</p>
+</div>
+<nav class="flex-1 py-4 overflow-y-auto">
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-none border-l-4 border-secondary px-4 py-3 font-label-lg text-label-lg brightness-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+                    Expedientes
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+                    Validación
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                    Reportes
+                </a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high px-4 py-3 font-label-lg text-label-lg transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Configuración
+                </a>
+</nav>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full bg-[#691C32] text-white py-2 px-4 rounded-none font-label-lg text-label-lg hover:bg-opacity-90 transition-colors">
+                    Nuevo Trámite
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto">
+<div class="mb-stack-lg flex justify-between items-end">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary-container">Registrar Nuevo Trámite</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Complete el formulario para dar de alta un nuevo procedimiento administrativo en el catálogo institucional.</p>
+</div>
+</div>
+<form class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Main Form Area (8 columns) -->
+<div class="md:col-span-8 flex flex-col gap-stack-md">
+<!-- Basic Info Card -->
+<div class="bg-surface-container-lowest border border-border-subtle p-6 border-t-4 border-t-gob-gold-light">
+<h2 class="font-headline-sm text-headline-sm text-on-surface mb-stack-md border-b border-border-subtle pb-2">Información General</h2>
+<div class="space-y-4">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1" for="procedure_name">Nombre del Trámite <span class="text-primary-container">*</span></label>
+<input class="form-input w-full p-2 bg-white text-on-surface font-body-md" id="procedure_name" placeholder="Ej. Solicitud de Pasaporte Ordinario" type="text"/>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1" for="institution">Institución Responsable <span class="text-primary-container">*</span></label>
+<select class="form-select w-full p-2 bg-white text-on-surface font-body-md" id="institution">
+<option disabled="" selected="" value="">Seleccione una institución</option>
+<option value="sre">Secretaría de Relaciones Exteriores (SRE)</option>
+<option value="sep">Secretaría de Educación Pública (SEP)</option>
+<option value="salud">Secretaría de Salud</option>
+</select>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1" for="description">Descripción del Procedimiento <span class="text-primary-container">*</span></label>
+<textarea class="form-textarea w-full p-2 bg-white text-on-surface font-body-md" id="description" placeholder="Describa el objetivo y alcance del trámite..." rows="4"></textarea>
+</div>
+</div>
+</div>
+<!-- Requirements Section (Dynamic) -->
+<div class="bg-surface-container-lowest border border-border-subtle p-6 mt-4">
+<div class="flex justify-between items-center mb-stack-md border-b border-border-subtle pb-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Documentos Requeridos</h2>
+<button class="text-primary-container hover:text-gob-maroon-dark font-label-lg text-label-lg flex items-center gap-1" onclick="addRequirement()" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="add_circle">add_circle</span>
+                                Agregar Documento
+                            </button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-4">Añada los requisitos documentales necesarios para la ejecución de este trámite.</p>
+<div class="space-y-4" id="requirements-list">
+<!-- Requirement Item Template -->
+<div class="requirement-item flex gap-4 items-start bg-surface-gray p-4 border border-border-subtle">
+<div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1">Nombre del Documento</label>
+<input class="form-input w-full p-2 bg-white text-on-surface font-body-sm" placeholder="Ej. Identificación Oficial" type="text"/>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1">Tipo de Documento</label>
+<select class="form-select w-full p-2 bg-white text-on-surface font-body-sm">
+<option value="pdf">PDF (Original o Copia)</option>
+<option value="image">Imagen (JPG/PNG)</option>
+<option value="xml">Archivo XML</option>
+</select>
+</div>
+<div class="md:col-span-2 flex items-center gap-2 mt-2">
+<input class="text-primary-container border-gob-gold-light focus:ring-primary-container" id="req_1_mandatory" type="checkbox"/>
+<label class="font-body-sm text-body-sm text-on-surface" for="req_1_mandatory">Documento Obligatorio</label>
+</div>
+</div>
+<button class="text-error hover:text-on-error-container mt-6" onclick="this.closest('.requirement-item').remove()" type="button">
+<span class="material-symbols-outlined" data-icon="delete">delete</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Form Area (4 columns) -->
+<div class="md:col-span-4 flex flex-col gap-stack-md">
+<div class="bg-surface-container-lowest border border-border-subtle p-6">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-4">Configuración Adicional</h3>
+<div class="space-y-4">
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1">Costo M.N. (Opcional)</label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 flex items-center pl-3 text-on-surface-variant font-body-md">$</span>
+<input class="form-input w-full pl-8 p-2 bg-white text-on-surface font-body-md" placeholder="0.00" type="number"/>
+</div>
+</div>
+<div>
+<label class="block font-label-lg text-label-lg text-on-surface mb-1">Tiempo Estimado de Respuesta</label>
+<div class="flex gap-2">
+<input class="form-input w-1/2 p-2 bg-white text-on-surface font-body-md" placeholder="Ej. 15" type="number"/>
+<select class="form-select w-1/2 p-2 bg-white text-on-surface font-body-md">
+<option>Días Hábiles</option>
+<option>Días Naturales</option>
+<option>Horas</option>
+</select>
+</div>
+</div>
+<div class="pt-4 border-t border-border-subtle">
+<label class="block font-label-lg text-label-lg text-on-surface mb-2">Estado del Trámite</label>
+<div class="flex items-center gap-2 bg-secondary-fixed p-2 border border-gob-gold-light justify-center">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-lg text-label-lg text-secondary">Borrador</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-3 mt-4">
+<button class="w-full bg-[#691C32] text-white py-3 px-4 font-label-lg text-label-lg hover:bg-opacity-90 transition-colors" type="submit">
+                            Guardar Trámite
+                        </button>
+<button class="w-full border border-primary-container text-primary-container py-3 px-4 font-label-lg text-label-lg hover:bg-surface-gray transition-colors" type="button">
+                            Cancelar
+                        </button>
+</div>
+</div>
+</form>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-gob-maroon-dark text-on-primary dark:text-white border-t-4 border-secondary flat no shadows w-full py-stack-lg px-margin-desktop mt-auto">
+<div class="max-w-container-max mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<span class="font-label-lg text-label-lg font-bold text-white">© 2024 Gobierno de México - INMIDOC</span>
+<nav class="flex gap-4 font-label-md text-label-md">
+<a class="text-white/80 hover:text-secondary-fixed transition-colors" href="#">Privacidad</a>
+<a class="text-white/80 hover:text-secondary-fixed transition-colors" href="#">Términos y Condiciones</a>
+<a class="text-white/80 hover:text-secondary-fixed transition-colors" href="#">Contacto</a>
+<a class="text-white/80 hover:text-secondary-fixed transition-colors" href="#">Mapa de sitio</a>
+</nav>
+</div>
+</footer>
+<script>
+        function addRequirement() {
+            const list = document.getElementById('requirements-list');
+            const id = Date.now();
+            const template = `
+                <div class="requirement-item flex gap-4 items-start bg-surface-gray p-4 border border-border-subtle">
+                    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-label-lg text-label-lg text-on-surface mb-1">Nombre del Documento</label>
+                            <input type="text" class="form-input w-full p-2 bg-white text-on-surface font-body-sm" placeholder="Ej. Comprobante de Domicilio">
+                        </div>
+                        <div>
+                            <label class="block font-label-lg text-label-lg text-on-surface mb-1">Tipo de Documento</label>
+                            <select class="form-select w-full p-2 bg-white text-on-surface font-body-sm">
+                                <option value="pdf">PDF (Original o Copia)</option>
+                                <option value="image">Imagen (JPG/PNG)</option>
+                                <option value="xml">Archivo XML</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2 flex items-center gap-2 mt-2">
+                            <input type="checkbox" id="req_${id}_mandatory" class="text-primary-container border-gob-gold-light focus:ring-primary-container" checked>
+                            <label for="req_${id}_mandatory" class="font-body-sm text-body-sm text-on-surface">Documento Obligatorio</label>
+                        </div>
+                    </div>
+                    <button type="button" class="text-error hover:text-on-error-container mt-6" onclick="this.closest('.requirement-item').remove()">
+                        <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                    </button>
+                </div>
+            `;
+            list.insertAdjacentHTML('beforeend', template);
+        }
+    </script>
+</body></html>

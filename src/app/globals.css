@@ -1,26 +1,91 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f9f9f9;
+  --foreground: #1a1c1c;
+  --surface: #f9f9f9;
+  --surface-muted: #f5f5f5;
+  --surface-card: #ffffff;
+  --surface-line: #e0e0e0;
+  --maroon: #611232;
+  --maroon-strong: #691c32;
+  --maroon-dark: #4c041d;
+  --gold: #bc955c;
+  --gold-light: #d4c19c;
+  --text-main: #212121;
+  --text-muted: #544245;
+  --danger: #ba1a1a;
+  --danger-soft: #ffdad6;
+  --success-soft: #e8e8e8;
+  --warning-soft: #ffd395;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: "Montserrat", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "SFMono-Regular", "Menlo", monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Montserrat", "Avenir Next", "Segoe UI", sans-serif;
+  letter-spacing: 0;
+}
+
+h1,
+h2,
+h3,
+.brand-serif {
+  font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
+}
+
+a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.shell-container {
+  width: min(100% - 32px, 1200px);
+  margin-inline: auto;
+}
+
+.focus-ring:focus-visible {
+  outline: 2px solid var(--maroon-strong);
+  outline-offset: 2px;
+}
+
+.institutional-card {
+  background: var(--surface-card);
+  border: 1px solid var(--surface-line);
+}
+
+.gold-rule-top {
+  border-top: 4px solid var(--gold-light);
+}
+
+.status-pending {
+  background: var(--danger-soft);
+  color: #93000a;
+  border: 1px solid rgba(186, 26, 26, 0.2);
+}
+
+.status-progress {
+  background: var(--warning-soft);
+  color: #5e4110;
+  border: 1px solid rgba(121, 89, 38, 0.18);
+}
+
+.status-resolved {
+  background: var(--success-soft);
+  color: var(--text-main);
+  border: 1px solid var(--surface-line);
 }

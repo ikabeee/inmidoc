@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background antialiased" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - INMIDOC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&amp;family=Source+Serif+4:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-fixed": "#241a03",
+                "border-subtle": "#E0E0E0",
+                "surface-gray": "#F5F5F5",
+                "surface-container-low": "#f3f3f3",
+                "primary-fixed": "#ffd9de",
+                "surface-container-lowest": "#ffffff",
+                "inverse-surface": "#2f3131",
+                "on-primary-fixed-variant": "#7b2a3f",
+                "on-surface-variant": "#544245",
+                "on-tertiary": "#ffffff",
+                "on-error": "#ffffff",
+                "on-tertiary-fixed-variant": "#524529",
+                "on-primary-fixed": "#3f0016",
+                "on-primary-container": "#eb8399",
+                "background": "#f9f9f9",
+                "tertiary-container": "#43371c",
+                "primary-container": "#691c32",
+                "tertiary": "#2c2208",
+                "on-secondary-container": "#7a5926",
+                "secondary": "#795926",
+                "on-tertiary-container": "#b2a07d",
+                "tertiary-fixed-dim": "#d8c49f",
+                "on-primary": "#ffffff",
+                "secondary-container": "#ffd395",
+                "outline": "#877275",
+                "tertiary-fixed": "#f5e0ba",
+                "surface-bright": "#f9f9f9",
+                "outline-variant": "#d9c0c4",
+                "gob-maroon-dark": "#611232",
+                "secondary-fixed": "#ffddb1",
+                "text-main": "#212121",
+                "inverse-primary": "#ffb1bf",
+                "surface-container-high": "#e8e8e8",
+                "surface-dim": "#dadada",
+                "on-secondary": "#ffffff",
+                "on-secondary-fixed-variant": "#5e4110",
+                "surface-variant": "#e2e2e2",
+                "secondary-fixed-dim": "#eac083",
+                "primary": "#4c041d",
+                "error-container": "#ffdad6",
+                "surface-container": "#eeeeee",
+                "primary-fixed-dim": "#ffb1bf",
+                "surface-container-highest": "#e2e2e2",
+                "on-error-container": "#93000a",
+                "on-background": "#1a1c1c",
+                "surface-tint": "#994157",
+                "inverse-on-surface": "#f1f1f1",
+                "gob-gold-light": "#D4C19C",
+                "error": "#ba1a1a",
+                "on-surface": "#1a1c1c",
+                "on-secondary-fixed": "#291800",
+                "surface": "#f9f9f9"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "gutter": "24px",
+                "container-max": "1200px",
+                "unit": "8px",
+                "stack-lg": "32px",
+                "stack-sm": "8px",
+                "stack-md": "16px",
+                "margin-desktop": "40px",
+                "margin-mobile": "16px"
+        },
+        "fontFamily": {
+                "body-lg": [
+                        "montserrat"
+                ],
+                "headline-lg-mobile": [
+                        "sourceSerif4"
+                ],
+                "headline-lg": [
+                        "sourceSerif4"
+                ],
+                "headline-sm": [
+                        "sourceSerif4"
+                ],
+                "body-sm": [
+                        "montserrat"
+                ],
+                "body-md": [
+                        "montserrat"
+                ],
+                "headline-md": [
+                        "sourceSerif4"
+                ],
+                "label-lg": [
+                        "montserrat"
+                ],
+                "display-lg": [
+                        "sourceSerif4"
+                ],
+                "label-md": [
+                        "montserrat"
+                ]
+        },
+        "fontSize": {
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-sm": [
+                        "20px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "body-sm": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-lg": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.05em",
+                                "fontWeight": "600"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ],
+                "label-md": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "fontWeight": "600"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+    body { font-family: 'Montserrat', sans-serif; }
+    h1, h2, h3, h4, h5, h6, .font-serif { font-family: 'Source Serif 4', serif; }
+</style>
+</head>
+<body class="bg-background text-on-surface h-full flex overflow-hidden">
+<!-- TopNavBar -->
+<header class="bg-primary dark:bg-gob-maroon-dark text-on-primary dark:text-white flex justify-between items-center w-full px-margin-desktop h-16 fixed top-0 z-50 shadow-sm">
+<div class="flex items-center gap-4">
+<div class="font-headline-md text-headline-md font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="account_balance">account_balance</span>
+                INMIDOC
+            </div>
+</div>
+<nav class="hidden md:flex gap-6 h-full items-center">
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200" href="#">Trámites</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200" href="#">Gobierno</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200" href="#">Participa</a>
+<a class="text-white/90 font-label-lg text-label-lg hover:text-gob-gold-light transition-colors duration-200" href="#">Datos</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="font-label-lg text-label-lg text-on-primary bg-primary-container hover:bg-gob-maroon-dark px-4 py-2 rounded transition-colors duration-200">Iniciar Sesión</button>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 z-40 flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant transition-transform transform -translate-x-full md:translate-x-0">
+<div class="p-6 border-b border-border-subtle dark:border-outline-variant flex flex-col items-center">
+<img alt="Usuario Administrativo" class="w-16 h-16 rounded-full object-cover mb-4 border-2 border-primary-container" data-alt="A professional headshot of a government administrative official in a formal setting, neutral lighting, corporate aesthetic, high quality portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlN_CAYeoHTSYq_sJZ5MJG09hLLB1zHLj_toJ5H6RGOillSsuSlEa6dKIOfseujTSofaoA5hng86r9maxvdLlgenopN2B3Kf0jo_Huo4xHe9Dj9Z3KDMj8_Qy1bQdbXiwVaCpGUQcEHm3novnpj0WJAps4puBIHq82kfaXVvMN4PIDY0vVz2o318sk1v1_cHSY6r7XK2uCZ-DEnzh-kdCnezIAjwGv4CZf_4Sii8jJ5nTLccTuoznl8w"/>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-primary dark:text-primary-fixed-dim text-center">Panel INMIDOC</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant text-center">Administración Central</p>
+</div>
+<nav class="flex-1 overflow-y-auto py-4 flex flex-col gap-1">
+<!-- Active Item -->
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-none border-l-4 border-secondary px-4 py-3 opacity-95 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-lg text-label-lg">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="folder_shared">folder_shared</span>
+<span class="font-label-lg text-label-lg">Expedientes</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-lg text-label-lg">Validación</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-lg text-label-lg">Reportes</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant px-4 py-3 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-lg text-label-lg">Configuración</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-subtle dark:border-outline-variant">
+<button class="w-full bg-primary-container text-white font-label-lg text-label-lg py-3 px-4 rounded-DEFAULT flex items-center justify-center gap-2 hover:bg-gob-maroon-dark transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                 Nuevo Trámite
+             </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 mt-16 p-margin-desktop overflow-y-auto h-[calc(100vh-64px)] bg-surface flex flex-col max-w-container-max mx-auto w-full">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-stack-lg gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Visión General</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Resumen del estado actual del sistema INMIDOC.</p>
+</div>
+<div class="flex gap-4">
+<button class="bg-secondary text-white font-label-lg text-label-lg px-6 py-2 rounded-DEFAULT hover:bg-secondary-container hover:text-on-secondary-container transition-colors shadow-sm">
+                    Ver Reportes
+                </button>
+<button class="bg-primary-container text-white font-label-lg text-label-lg px-6 py-2 rounded-DEFAULT hover:bg-primary transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="add_circle">add_circle</span>
+                    Agregar Trámite
+                </button>
+</div>
+</div>
+<!-- Bento Grid Overview Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+<!-- Card 1: Total Procedures -->
+<div class="bg-surface-container-lowest p-6 border border-border-subtle rounded-lg shadow-[0_4px_20px_-10px_rgba(97,18,50,0.05)] border-t-4 border-t-gob-gold-light relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 bg-surface-container-low w-24 h-24 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex justify-between items-start relative z-10">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-1 uppercase tracking-wider">Total Trámites</p>
+<h3 class="font-display-lg text-display-lg text-text-main">14,592</h3>
+</div>
+<div class="p-3 bg-secondary-fixed rounded-full text-on-secondary-fixed">
+<span class="material-symbols-outlined text-[28px]" data-icon="description">description</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-secondary font-label-md text-label-md relative z-10">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+<span>+12% desde el mes pasado</span>
+</div>
+</div>
+<!-- Card 2: Active Tickets -->
+<div class="bg-surface-container-lowest p-6 border border-border-subtle rounded-lg shadow-[0_4px_20px_-10px_rgba(97,18,50,0.05)] border-t-4 border-t-primary-container relative overflow-hidden group">
+<div class="absolute -right-6 -top-6 bg-primary-fixed w-24 h-24 rounded-full opacity-30 group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex justify-between items-start relative z-10">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-1 uppercase tracking-wider">Tickets Activos</p>
+<h3 class="font-display-lg text-display-lg text-text-main">843</h3>
+</div>
+<div class="p-3 bg-primary-container rounded-full text-white">
+<span class="material-symbols-outlined text-[28px]" data-icon="confirmation_number">confirmation_number</span>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2 text-error font-label-md text-label-md relative z-10">
+<span class="material-symbols-outlined text-[16px]" data-icon="info">info</span>
+<span>45 requieren atención inmediata</span>
+</div>
+</div>
+<!-- Card 3: Institutions -->
+<div class="bg-surface-container-lowest p-6 border border-border-subtle rounded-lg shadow-[0_4px_20px_-10px_rgba(97,18,50,0.05)] relative overflow-hidden group flex flex-col justify-between">
+<div class="flex justify-between items-start relative z-10">
+<div>
+<p class="font-label-lg text-label-lg text-on-surface-variant mb-1 uppercase tracking-wider">Instituciones Enlazadas</p>
+<h3 class="font-display-lg text-display-lg text-text-main">128</h3>
+</div>
+<div class="p-3 bg-surface-container-high rounded-full text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]" data-icon="account_balance">account_balance</span>
+</div>
+</div>
+<div class="mt-4 relative z-10 w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-gob-gold-light h-full w-[85%] rounded-full"></div>
+</div>
+<p class="text-right font-label-md text-label-md text-on-surface-variant mt-1">85% Cobertura Nacional</p>
+</div>
+</div>
+<!-- Secondary Section: Recent Activity & Status -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter flex-1 pb-stack-lg">
+<!-- Activity Table List -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-border-subtle rounded-lg shadow-[0_4px_20px_-10px_rgba(97,18,50,0.05)] flex flex-col overflow-hidden">
+<div class="p-6 border-b border-border-subtle bg-surface-gray/50 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-primary">Actividad Reciente</h2>
+<button class="text-secondary hover:text-secondary-fixed-dim font-label-md text-label-md uppercase tracking-wider flex items-center gap-1 transition-colors">
+                        Ver Todo <span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<div class="flex-1 overflow-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border-subtle text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
+<th class="p-4 font-semibold">Folio</th>
+<th class="p-4 font-semibold">Trámite</th>
+<th class="p-4 font-semibold">Solicitante</th>
+<th class="p-4 font-semibold">Estado</th>
+<th class="p-4 font-semibold">Fecha</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md text-text-main">
+<tr class="border-b border-border-subtle/50 hover:bg-surface-gray transition-colors cursor-pointer">
+<td class="p-4 font-label-lg text-label-lg text-primary-container">FX-2024-0891</td>
+<td class="p-4">Registro de Identidad</td>
+<td class="p-4">Juan Carlos Pérez</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-label-md font-semibold">En Revisión</span>
+</td>
+<td class="p-4 text-on-surface-variant font-body-sm">Hoy, 10:42 AM</td>
+</tr>
+<tr class="border-b border-border-subtle/50 bg-surface-bright hover:bg-surface-gray transition-colors cursor-pointer">
+<td class="p-4 font-label-lg text-label-lg text-primary-container">FX-2024-0890</td>
+<td class="p-4">Acreditación Legal</td>
+<td class="p-4">María López Sánchez</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-surface-container-highest text-on-surface rounded text-label-md font-semibold">Completado</span>
+</td>
+<td class="p-4 text-on-surface-variant font-body-sm">Ayer, 16:15 PM</td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-gray transition-colors cursor-pointer">
+<td class="p-4 font-label-lg text-label-lg text-primary-container">FX-2024-0889</td>
+<td class="p-4">Validación Documental</td>
+<td class="p-4">Empresa XYZ S.A.</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-error-container text-on-error-container rounded text-label-md font-semibold">Rechazado</span>
+</td>
+<td class="p-4 text-on-surface-variant font-body-sm">Ayer, 09:30 AM</td>
+</tr>
+<tr class="border-b border-border-subtle/50 bg-surface-bright hover:bg-surface-gray transition-colors cursor-pointer">
+<td class="p-4 font-label-lg text-label-lg text-primary-container">FX-2024-0888</td>
+<td class="p-4">Registro de Identidad</td>
+<td class="p-4">Roberto Gómez Bolaños</td>
+<td class="p-4">
+<span class="inline-block px-3 py-1 bg-secondary-fixed text-on-secondary-fixed rounded text-label-md font-semibold">En Revisión</span>
+</td>
+<td class="p-4 text-on-surface-variant font-body-sm">12 Oct, 14:20 PM</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Stats / Image Panel -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-lg shadow-[0_4px_20px_-10px_rgba(97,18,50,0.05)] overflow-hidden flex flex-col">
+<div class="h-48 w-full relative">
+<div class="absolute inset-0 bg-primary/20 z-10 mix-blend-multiply"></div>
+<img alt="Documentos Oficiales" class="w-full h-full object-cover z-0" data-alt="A macro shot of official government documents with subtle gold foil stamping, resting on a clean white desk in bright, soft natural light, corporate and authoritative mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2q4XCbIMl5DBI1sztKAf8s2pcDaZSFdGruBVy0bggBA50Xdj3-5PMd963Ig0DQguvrOM0PzkEEHuKlG1JVWJ9LWUhXOU6cy0TnKB35xjHuIsozKcNXuiW3HsqK5N-NMt3P0-xvcwCB2-7ux0SG4XW3CtksHh4Ll25iWBbT5l67hWjK-c8RU4C4kUSjoqzstiZoKfGTD3XqmnKLV9dlcXWIzYk7b4YpEzdjhrtixGYrDnQyim2yQFDHA"/>
+<div class="absolute bottom-4 left-4 z-20 text-white">
+<h3 class="font-headline-md text-headline-md drop-shadow-md">Eficiencia Operativa</h3>
+</div>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-around">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container rounded-full text-primary-container">
+<span class="material-symbols-outlined" data-icon="timer">timer</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Tiempo Promedio</p>
+<p class="font-headline-sm text-headline-sm text-text-main">2.4 Días</p>
+</div>
+</div>
+</div>
+<div class="w-full h-px bg-border-subtle my-2"></div>
+<div class="flex items-center justify-between mt-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-surface-container rounded-full text-secondary">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase">Tasa de Aprobación</p>
+<p class="font-headline-sm text-headline-sm text-text-main">94.2%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>
