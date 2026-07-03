@@ -59,7 +59,6 @@ export function ProcedureCatalog({
             <h3 className="brand-serif mt-5 text-3xl font-semibold text-[var(--maroon-strong)]">{featured.title}</h3>
             <p className="mt-3 line-clamp-2 text-[var(--text-muted)]">{featured.description}</p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Button>Iniciar Trámite</Button>
               <Button variant="outline">Ver Detalles</Button>
             </div>
           </div>
