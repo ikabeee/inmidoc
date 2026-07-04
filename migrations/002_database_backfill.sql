@@ -4,7 +4,8 @@ FROM (
     VALUES
         ('Admin Principal', 'admin@inmidoc.test', '$2b$10$AVOHfbbqAMfKmqR3lsmmAuZlGMaXS3TVfM5SWvstIHOOVoMnWyWHK'),
         ('Soporte Inmidoc', 'soporte@inmidoc.test', '$2b$10$0C7s6mRB0q.5YLEQkrhTGu4LAWevB0OjW2fQuyoSDBtO.aZiKncCS'),
-        ('Gestor Tramites', 'tramites@inmidoc.test', '$2b$10$4VM/7jx3TgOf/t/Y5jX7dufFKTmTUeQcTmH5.ZJu3BcG74.FnM4m.')
+        ('Gestor Tramites', 'tramites@inmidoc.test', '$2b$10$4VM/7jx3TgOf/t/Y5jX7dufFKTmTUeQcTmH5.ZJu3BcG74.FnM4m.'),
+        ('Admin Temporal', 'admin_temp@inmidoc.test', '$2b$10$SPuSDi79oaJdiBfGRw4HTezrMs0iIoCS4MG24K0TaGa4xeT1Xmzkm')
 ) AS seed(name, email, hash_password)
 WHERE NOT EXISTS (
     SELECT 1

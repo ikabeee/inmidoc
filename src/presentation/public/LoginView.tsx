@@ -1,7 +1,27 @@
+import type { FormEvent } from "react";
+
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
 
-export function LoginView() {
+type LoginViewProps = {
+  email: string;
+  password: string;
+  error?: string;
+  isSubmitting?: boolean;
+  onEmailChange: (value: string) => void;
+  onPasswordChange: (value: string) => void;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => Promise<void> | void;
+};
+
+export function LoginView({
+  email,
+  password,
+  error,
+  isSubmitting,
+  onEmailChange,
+  onPasswordChange,
+  onSubmit,
+}: LoginViewProps) {
   return (
     <section className="flex min-h-[calc(100vh-192px)] items-center justify-center px-4 py-12">
       <div className="institutional-card gold-rule-top w-full max-w-md p-8 md:p-10">
@@ -9,7 +29,7 @@ export function LoginView() {
           <h1 className="brand-serif text-4xl font-bold">Iniciar Sesión</h1>
           <p className="mt-3 text-(--text-muted)">Acceso administrativo INMIDOC</p>
         </div>
-        <form className="mt-8 grid gap-5">
+        <form onSubmit={onSubmit} className="mt-8 grid gap-5">
           <label className="grid gap-2 text-sm font-bold tracking-[0.05em]">
             Correo Electrónico <span className="text-(--maroon)">*</span>
             <span className="relative">
@@ -18,6 +38,9 @@ export function LoginView() {
                 className="focus-ring h-14 w-full border border-(--gold-light) pl-10 pr-4 font-normal tracking-0"
                 placeholder="usuario@inmidoc.gob.mx"
                 type="email"
+                value={email}
+                onChange={(event) => onEmailChange(event.target.value)}
+                required
               />
             </span>
           </label>
@@ -29,14 +52,17 @@ export function LoginView() {
                 className="focus-ring h-14 w-full border border-(--gold-light) pl-10 pr-4 font-normal tracking-0"
                 placeholder="••••••••"
                 type="password"
+                value={password}
+                onChange={(event) => onPasswordChange(event.target.value)}
+                required
               />
             </span>
           </label>
-          <a className="justify-self-end text-sm text-[#795926] hover:underline" href="#">
-            ¿Olvidaste tu contraseña?
-          </a>
-          <Button className="w-full" type="button">
-            Ingresar al Sistema <Icon name="login" />
+
+          {error ? <p className="text-sm font-semibold text-(--danger)">{error}</p> : null}
+
+          <Button className="w-full" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Ingresando..." : "Ingresar al Sistema"} <Icon name="login" />
           </Button>
           <div className="mt-2 flex gap-4 border border-(--surface-line) bg-(--surface-muted) p-4 text-sm leading-6 text-(--text-muted)">
             <Icon name="info" className="mt-0.5 text-[#795926]" />

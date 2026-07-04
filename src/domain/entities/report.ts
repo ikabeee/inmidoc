@@ -5,10 +5,10 @@ export type ReportTicket = {
   title: string;
   description: string;
   status: TicketStatus;
-  createdAt: string;
-  priority: "Alta" | "Media" | "Baja";
-  requester: string;
-  department: string;
+  createdAt?: string;
+  priority?: "Alta" | "Media" | "Baja";
+  requester?: string;
+  department?: string;
 };
 
 export type UserReportCategory = {

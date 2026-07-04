@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { ReportTicket } from "@/src/domain/entities/report";
 
 import { Button } from "../components/Button";
@@ -10,6 +13,8 @@ function statusClass(status: string) {
 }
 
 export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket[]; selectedTicket: ReportTicket }) {
+  const [activeTicket, setActiveTicket] = useState<ReportTicket>(selectedTicket);
+
   return (
     <div className="mx-auto max-w-[1180px]">
       <div className="mb-8 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -17,21 +22,12 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
           <h1 className="brand-serif text-4xl font-bold text-(--text-main)">Bandeja de Reportes</h1>
           <p className="mt-3 text-lg text-(--text-muted)">Gestión y seguimiento de tickets ciudadanos e internos.</p>
         </div>
-        <label className="institutional-card flex h-14 items-center gap-3 px-5">
-          <Icon name="filter" />
-          <select className="focus-ring border-0 bg-transparent font-bold">
-            <option>Todos los estados</option>
-            <option>Pendiente</option>
-            <option>En Progreso</option>
-            <option>Resuelto</option>
-          </select>
-        </label>
       </div>
       <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
         <section className="institutional-card overflow-hidden">
           <div className="flex items-center justify-between border-b border-(--surface-line) p-5">
             <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Listado de Tickets</h2>
-            <span className="bg-(--surface-muted) px-3 py-1 text-sm">Mostrando 5 de 142</span>
+            <span className="bg-(--surface-muted) px-3 py-1 text-sm">Mostrando {tickets.length} tickets</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left">
@@ -47,7 +43,15 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
                 {tickets.map((ticket, index) => (
                   <tr
                     key={ticket.id}
-                    className={`border-t border-(--surface-line) ${index === 0 ? "bg-[#fff0f3]" : "bg-white hover:bg-(--surface-muted)"}`}
+                    className={`border-t border-(--surface-line) ${ticket.id === activeTicket.id ? "bg-[#fff0f3]" : "bg-white hover:bg-(--surface-muted)"}`}
+                    onClick={() => setActiveTicket(ticket)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(event) => {
+                      if (event.key === "Enter" || event.key === " ") {
+                        setActiveTicket(ticket);
+                      }
+                    }}
                   >
                     <td className="p-5 font-bold text-(--maroon-strong)">{ticket.id}</td>
                     <td className="p-5">
@@ -85,45 +89,23 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="text-sm">Ticket Seleccionado</p>
-                <h2 className="brand-serif mt-1 text-2xl font-bold text-(--maroon)">{selectedTicket.id}</h2>
+                <h2 className="brand-serif mt-1 text-2xl font-bold text-(--maroon)">{activeTicket.id}</h2>
               </div>
-              <span className={`px-3 py-2 text-sm ${statusClass(selectedTicket.status)}`}>{selectedTicket.status}</span>
+              <span className={`px-3 py-2 text-sm ${statusClass(activeTicket.status)}`}>{activeTicket.status}</span>
             </div>
-            <h3 className="mt-6 text-xl font-bold">{selectedTicket.title}</h3>
+            <h3 className="mt-6 text-xl font-bold">{activeTicket.title}</h3>
           </div>
           <div className="border-t-4 border-(--gold-light) p-6">
             <h3 className="border-b border-(--surface-line) pb-3 text-lg font-bold">Descripción del Problema</h3>
-            <p className="mt-4 leading-7 text-(--text-muted)">{selectedTicket.description}</p>
+            <p className="mt-4 leading-7 text-(--text-muted)">{activeTicket.description}</p>
             <div className="mt-6 grid grid-cols-2 gap-5 text-sm">
-              <div>
-                <p className="font-bold">Fecha de Creación</p>
-                <p className="mt-2">{selectedTicket.createdAt}</p>
-              </div>
-              <div>
-                <p className="font-bold">Prioridad</p>
-                <p className="mt-2 inline-flex items-center gap-2 font-bold text-(--danger)">
-                  <Icon name="alert" size={16} />
-                  {selectedTicket.priority}
-                </p>
-              </div>
-              <div>
-                <p className="font-bold">Reportado por</p>
-                <p className="mt-2">{selectedTicket.requester}</p>
-              </div>
-              <div>
-                <p className="font-bold">Departamento</p>
-                <p className="mt-2">{selectedTicket.department}</p>
-              </div>
+              
             </div>
             <label className="mt-7 grid gap-2 text-sm font-bold">
               Actualizar Estado
-              <select className="focus-ring h-11 border border-(--surface-line) px-3 font-normal">
-                <option>{selectedTicket.status}</option>
+              <select className="focus-ring h-11 border border-(--surface-line) px-3 font-normal" value={activeTicket.status} disabled>
+                <option>{activeTicket.status}</option>
               </select>
-            </label>
-            <label className="mt-5 grid gap-2 text-sm font-bold">
-              Añadir Nota Interna
-              <textarea className="focus-ring min-h-28 border border-(--surface-line) p-3 font-normal" placeholder="Escriba comentarios sobre la resolución..." />
             </label>
             <div className="mt-7 grid grid-cols-2 gap-3">
               <Button variant="outline">Reasignar</Button>

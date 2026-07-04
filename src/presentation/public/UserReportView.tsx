@@ -7,22 +7,16 @@ type ReportCategory = {
   description: string;
 };
 
-type ReportProcedure = {
-  id: string;
-  title: string;
-  institution: string;
+type UserReportViewProps = {
+  categories: ReportCategory[];
+  createAction: (formData: FormData) => Promise<void>;
 };
 
-export function UserReportView({
-  categories,
-}: {
-  categories: ReportCategory[];
-  procedures: ReportProcedure[];
-}) {
+export function UserReportView({ categories, createAction }: UserReportViewProps) {
   return (
     <div className="bg-(--surface) flex-col">
       <section className="border-b border-(--surface-line) bg-white">
-        <div className="shell-container grid gap-8 py-10 lg:grid-cols-[1fr_360px] lg:items-end">
+        <div className="shell-container grid gap-8 py-10 lg:grid-cols-[1fr_0px] lg:items-end">
           <div>
             <div className="inline-flex items-center gap-2 border border-(--gold-light) bg-(--surface-muted) px-3 py-2 text-xs font-bold uppercase tracking-widest text-(--maroon-strong)">
               <Icon name="ticket" size={16} />
@@ -39,7 +33,7 @@ export function UserReportView({
       </section>
 
       <section className="shell-container grid gap-6 py-8 lg:grid-cols-[1fr_340px] w-full">
-        <form className="institutional-card grid gap-6 p-6">
+        <form action={createAction} method="post" className="institutional-card grid gap-6 p-6">
           <div>
             <h2 className="brand-serif text-3xl font-semibold text-(--maroon)">Datos del reporte</h2>
             <p className="mt-3 text-(--text-muted)">Completa la información base para clasificar el ticket.</p>
@@ -53,7 +47,6 @@ export function UserReportView({
                   key={category.id}
                   className="focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-(--maroon-strong) border border-(--surface-line) bg-(--surface-muted) p-4"
                 >
-                  <input className="sr-only" name="category" type="radio" />
                   <span className="flex items-center gap-2 font-bold text-(--maroon-strong)">
                     <Icon name="listChecks" size={18} />
                     {category.label}
@@ -69,6 +62,8 @@ export function UserReportView({
             <input
               className="focus-ring h-12 border border-(--gold-light) bg-white px-3 font-normal"
               placeholder="Ej. No puedo cargar comprobante de domicilio"
+              name="title"
+              required
             />
           </label>
 
@@ -77,14 +72,18 @@ export function UserReportView({
             <textarea
               className="focus-ring min-h-40 border border-(--gold-light) bg-white p-3 font-normal"
               placeholder="Describe qué intentabas hacer, qué ocurrió y en qué pantalla se presentó el problema..."
+              name="description"
+              required
             />
           </label>
 
+          <input type="hidden" name="status" value="Pendiente" />
+
           <div className="flex flex-col gap-3 border-t border-(--surface-line) pt-6 sm:flex-row sm:justify-end">
-            <Button variant="outline" type="button">
+            <Button variant="outline" type="reset">
               Cancelar
             </Button>
-            <Button type="button">
+            <Button type="submit">
               Enviar reporte <Icon name="arrowRight" size={18} />
             </Button>
           </div>

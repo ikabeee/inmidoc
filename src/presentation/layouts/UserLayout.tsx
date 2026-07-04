@@ -34,18 +34,13 @@ export function UserLayout({ children }: { children: ReactNode }) {
         <div className="shell-container flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div>
             <p className="text-sm font-bold">
-              © 2024 Gobierno de México - INMIDOC
+              © 2026 Gobierno de México - INMIDOC
             </p>
             <p className="mt-2 text-sm text-white/80">
               Sistema de Gestión y Validación Documental.
             </p>
           </div>
-          <nav className="flex flex-wrap gap-x-7 gap-y-2 text-sm text-white/85">
-            <Link href="#">Privacidad</Link>
-            <Link href="#">Términos y Condiciones</Link>
-            <Link href="#">Contacto</Link>
-            <Link href="#">Mapa de sitio</Link>
-          </nav>
+          
         </div>
       </footer>
     </div>
