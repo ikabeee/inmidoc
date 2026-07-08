@@ -1,4 +1,8 @@
-import type { AdminInstitution, AdminProcedure } from "@/src/application/admin/getAdminProceduresModel";
+"use client";
+
+import { useState } from "react";
+
+import type { AdminInstitution, AdminProcedure, AdminProcedureRequirement } from "@/src/application/admin/getAdminProceduresModel";
 
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
@@ -41,6 +45,127 @@ function InstitutionSelect({
   );
 }
 
+function ProcedureEditor({
+  institutions,
+  procedure,
+  updateAction,
+  deleteAction,
+}: {
+  institutions: AdminInstitution[];
+  procedure: AdminProcedure;
+  updateAction: ProcedureAction;
+  deleteAction: ProcedureAction;
+}) {
+  const [requirementRows, setRequirementRows] = useState<{ key: string; documentId?: number; name: string }[]>(
+    procedure.requirements.map((requirement) => ({
+      key: `existing-${requirement.documentId}`,
+      documentId: requirement.documentId,
+      name: requirement.name,
+    })),
+  );
+  const [removedRequirementIds, setRemovedRequirementIds] = useState<number[]>([]);
+
+  function addRequirementRow() {
+    setRequirementRows((currentRows) => [
+      ...currentRows,
+      { key: `new-${currentRows.length + 1}-${Date.now()}`, name: "" },
+    ]);
+  }
+
+  function removeRequirementRow(index: number) {
+    setRequirementRows((currentRows) => {
+      const rowToRemove = currentRows[index];
+      if (rowToRemove?.documentId) {
+        setRemovedRequirementIds((currentIds) => [...currentIds, rowToRemove.documentId!]);
+      }
+
+      return currentRows.filter((_, currentIndex) => currentIndex !== index);
+    });
+  }
+
+  function updateRequirementName(index: number, value: string) {
+    setRequirementRows((currentRows) =>
+      currentRows.map((row, currentIndex) => (currentIndex === index ? { ...row, name: value } : row)),
+    );
+  }
+
+  return (
+    <div className="mt-3 w-[520px] max-w-[calc(100vw-3rem)] border border-(--surface-line) bg-white p-4 shadow-lg">
+      <form action={updateAction} className="grid gap-4">
+        <input name="procedure_id" type="hidden" value={procedure.procedureId} />
+        <input name="removed_requirement_ids" type="hidden" value={removedRequirementIds.join(",")} />
+        <label className="grid gap-2 text-sm font-bold">
+          Nombre
+          <input
+            className="focus-ring h-10 border border-(--surface-line) px-3 font-normal"
+            defaultValue={procedure.name}
+            name="name"
+            required
+          />
+        </label>
+        <label className="grid gap-2 text-sm font-bold">
+          Institución
+          <InstitutionSelect defaultValue={procedure.institutionId} institutions={institutions} />
+        </label>
+        <label className="grid gap-2 text-sm font-bold">
+          Descripción
+          <textarea
+            className="focus-ring min-h-24 border border-(--surface-line) p-3 font-normal"
+            defaultValue={procedure.description}
+            name="description"
+            required
+          />
+        </label>
+        <label className="grid gap-2 text-sm font-bold">
+          Palabras clave
+          <input
+            className="focus-ring h-10 border border-(--surface-line) px-3 font-normal"
+            defaultValue={keywordsText(procedure.keywords)}
+            name="keywords"
+            required
+          />
+        </label>
+        <div className="grid gap-3">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="text-sm font-bold">Requisitos documentales</span>
+            <button className="inline-flex items-center gap-2 text-sm font-bold text-(--maroon-strong)" onClick={addRequirementRow} type="button">
+              <Icon name="circlePlus" size={16} />
+              Agregar requisito
+            </button>
+          </div>
+          {requirementRows.map((requirement, index) => (
+            <div key={requirement.key} className="flex items-center gap-2">
+              {requirement.documentId ? <input name="requirement_ids[]" type="hidden" value={requirement.documentId} /> : null}
+              <input
+                className="focus-ring h-10 flex-1 border border-(--surface-line) px-3 font-normal"
+                name="requirement_names[]"
+                onChange={(event) => updateRequirementName(index, event.target.value)}
+                placeholder="Ej. Identificación oficial vigente"
+                required
+                value={requirement.name}
+              />
+              <button className="text-xl text-(--danger)" onClick={() => removeRequirementRow(index)} type="button" aria-label="Eliminar requisito">
+                <Icon name="trash" />
+              </button>
+            </div>
+          ))}
+        </div>
+        <Button type="submit" variant="secondary">
+          <Icon name="checkCircle" size={18} />
+          Guardar cambios
+        </Button>
+      </form>
+      <form action={deleteAction} className="mt-3 border-t border-(--surface-line) pt-3">
+        <input name="procedure_id" type="hidden" value={procedure.procedureId} />
+        <Button className="w-full border-(--danger) bg-(--danger) hover:bg-[#93000a]" type="submit">
+          <Icon name="trash" size={18} />
+          Eliminar trámite
+        </Button>
+      </form>
+    </div>
+  );
+}
+
 export function ProceduresView({
   institutions,
   procedures,
@@ -48,6 +173,12 @@ export function ProceduresView({
   updateAction,
   deleteAction,
 }: ProceduresViewProps) {
+  const [requirementRows, setRequirementRows] = useState([{ id: 1 }]);
+
+  function addRequirementRow() {
+    setRequirementRows((currentRows) => [...currentRows, { id: currentRows.length + 1 }]);
+  }
+
   return (
     <div className="mx-auto grid max-w-[1180px] gap-8">
       <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
@@ -100,6 +231,32 @@ export function ProceduresView({
               required
             />
           </label>
+          <div className="grid gap-3 lg:col-span-2">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <label className="text-sm font-bold">Requisitos documentales</label>
+              <button
+                className="inline-flex items-center gap-2 text-sm font-bold text-(--maroon-strong)"
+                onClick={addRequirementRow}
+                type="button"
+              >
+                <Icon name="circlePlus" size={16} />
+                Agregar otro requisito
+              </button>
+            </div>
+            <p className="text-sm text-(--text-muted)">
+              Añada los documentos o requisitos que deben presentar los usuarios al solicitar este trámite.
+            </p>
+            <div className="grid gap-3">
+              {requirementRows.map((row, index) => (
+                <input
+                  key={row.id}
+                  className="focus-ring h-11 border border-(--surface-line) px-3 font-normal"
+                  name="requirements"
+                  placeholder={index === 0 ? "Ej. Identificación oficial vigente" : "Ej. Comprobante de domicilio"}
+                />
+              ))}
+            </div>
+          </div>
           <div className="lg:col-span-2">
             <Button type="submit">
               <Icon name="circlePlus" size={18} />
@@ -159,56 +316,12 @@ export function ProceduresView({
                           <Icon name="settings" size={16} />
                           Gestionar
                         </summary>
-                        <div className="mt-3 w-[520px] max-w-[calc(100vw-3rem)] border border-(--surface-line) bg-white p-4 shadow-lg">
-                          <form action={updateAction} className="grid gap-4">
-                            <input name="procedure_id" type="hidden" value={procedure.procedureId} />
-                            <label className="grid gap-2 text-sm font-bold">
-                              Nombre
-                              <input
-                                className="focus-ring h-10 border border-(--surface-line) px-3 font-normal"
-                                defaultValue={procedure.name}
-                                name="name"
-                                required
-                              />
-                            </label>
-                            <label className="grid gap-2 text-sm font-bold">
-                              Institución
-                              <InstitutionSelect defaultValue={procedure.institutionId} institutions={institutions} />
-                            </label>
-                            <label className="grid gap-2 text-sm font-bold">
-                              Descripción
-                              <textarea
-                                className="focus-ring min-h-24 border border-(--surface-line) p-3 font-normal"
-                                defaultValue={procedure.description}
-                                name="description"
-                                required
-                              />
-                            </label>
-                            <label className="grid gap-2 text-sm font-bold">
-                              Palabras clave
-                              <input
-                                className="focus-ring h-10 border border-(--surface-line) px-3 font-normal"
-                                defaultValue={keywordsText(procedure.keywords)}
-                                name="keywords"
-                                required
-                              />
-                            </label>
-                            <Button type="submit" variant="secondary">
-                              <Icon name="checkCircle" size={18} />
-                              Guardar cambios
-                            </Button>
-                          </form>
-                          <form action={deleteAction} className="mt-3 border-t border-(--surface-line) pt-3">
-                            <input name="procedure_id" type="hidden" value={procedure.procedureId} />
-                            <Button
-                              className="w-full border-(--danger) bg-(--danger) hover:bg-[#93000a]"
-                              type="submit"
-                            >
-                              <Icon name="trash" size={18} />
-                              Eliminar trámite
-                            </Button>
-                          </form>
-                        </div>
+                        <ProcedureEditor
+                          deleteAction={deleteAction}
+                          institutions={institutions}
+                          procedure={procedure}
+                          updateAction={updateAction}
+                        />
                       </details>
                     </td>
                   </tr>
