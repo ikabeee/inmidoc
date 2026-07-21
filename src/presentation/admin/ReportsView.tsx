@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import type { ReportTicket } from "@/src/domain/entities/report";
+import type { ReportTicket, TicketStatus } from "@/src/domain/entities/report";
 
 import { Button } from "../components/Button";
 import { Icon } from "../components/Icon";
+
+const statusOptions: TicketStatus[] = ["Pendiente", "En Progreso", "Completado"];
 
 function statusClass(status: string) {
   if (status === "Pendiente") return "status-pending";
@@ -12,8 +14,73 @@ function statusClass(status: string) {
   return "status-resolved";
 }
 
+const PAGE_SIZE = 10;
+
 export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket[]; selectedTicket: ReportTicket }) {
-  const [activeTicket, setActiveTicket] = useState<ReportTicket>(selectedTicket);
+  const [visibleTickets, setVisibleTickets] = useState<ReportTicket[]>(tickets.filter((ticket) => ticket.status !== "Completado"));
+  const [activeTicket, setActiveTicket] = useState<ReportTicket>(
+    tickets.find((ticket) => ticket.id === selectedTicket.id && ticket.status !== "Completado") ?? visibleTickets[0] ?? selectedTicket,
+  );
+  const [pendingStatus, setPendingStatus] = useState<TicketStatus>(activeTicket.status);
+  const [isSaving, setIsSaving] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.max(1, Math.ceil(visibleTickets.length / PAGE_SIZE));
+  const paginatedTickets = visibleTickets.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  function goToPage(page: number) {
+    if (page < 1 || page > totalPages) {
+      return;
+    }
+
+    setCurrentPage(page);
+  }
+
+  async function handleSaveStatus() {
+    if (!activeTicket.id || activeTicket.id === "0") {
+      return;
+    }
+
+    setIsSaving(true);
+
+    try {
+      const response = await fetch(`/api/tickets?id=${activeTicket.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ status: pendingStatus }),
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo actualizar el estado del reporte");
+      }
+
+      if (pendingStatus === "Completado") {
+        setVisibleTickets((currentTickets) => currentTickets.filter((ticket) => ticket.id !== activeTicket.id));
+        setActiveTicket((currentTicket) => {
+          const nextTicket = visibleTickets.find((ticket) => ticket.id !== currentTicket.id);
+          return nextTicket ?? { ...currentTicket, status: pendingStatus };
+        });
+      } else {
+        setVisibleTickets((currentTickets) =>
+          currentTickets.map((ticket) => (ticket.id === activeTicket.id ? { ...ticket, status: pendingStatus } : ticket)),
+        );
+      }
+    } catch {
+      // noop for now
+    } finally {
+      setIsSaving(false);
+    }
+  }
+
+  const infoFields = [
+    { label: "Solicitante", value: activeTicket.requester },
+    { label: "Departamento", value: activeTicket.department },
+    { label: "Prioridad", value: activeTicket.priority },
+    { label: "Creado", value: activeTicket.createdAt },
+  ].filter((f) => !!f.value);
 
   return (
     <div className="mx-auto max-w-[1180px]">
@@ -27,7 +94,7 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
         <section className="institutional-card overflow-hidden">
           <div className="flex items-center justify-between border-b border-(--surface-line) p-5">
             <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Listado de Tickets</h2>
-            <span className="bg-(--surface-muted) px-3 py-1 text-sm">Mostrando {tickets.length} tickets</span>
+            <span className="bg-(--surface-muted) px-3 py-1 text-sm">Mostrando {visibleTickets.length} tickets</span>
           </div>
           <div className="overflow-x-auto">
             <table className="w-full min-w-[720px] text-left">
@@ -40,7 +107,7 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
                 </tr>
               </thead>
               <tbody>
-                {tickets.map((ticket, index) => (
+                {paginatedTickets.map((ticket) => (
                   <tr
                     key={ticket.id}
                     className={`border-t border-(--surface-line) ${ticket.id === activeTicket.id ? "bg-[#fff0f3]" : "bg-white hover:bg-(--surface-muted)"}`}
@@ -69,47 +136,104 @@ export function ReportsView({ tickets, selectedTicket }: { tickets: ReportTicket
               </tbody>
             </table>
           </div>
-          <div className="flex items-center justify-between p-5">
-            <button className="border border-(--surface-line) px-4 py-2 text-sm text-slate-400">Anterior</button>
-            <div className="flex gap-2">
-              {[1, 2, 3].map((page) => (
+          <div className="flex items-center justify-between gap-3 p-5">
+            <button
+              className={`border border-(--surface-line) px-4 py-2 text-sm ${currentPage === 1 ? "cursor-not-allowed text-slate-400" : "text-(--text-main)"}`}
+              disabled={currentPage === 1}
+              onClick={() => goToPage(currentPage - 1)}
+              type="button"
+            >
+              Anterior
+            </button>
+            <div className="flex flex-wrap justify-center gap-2">
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
                 <button
                   key={page}
-                  className={`h-10 w-10 border text-sm font-bold ${page === 1 ? "border-(--maroon) bg-(--maroon) text-white" : "border-(--surface-line) bg-white"}`}
+                  className={`h-10 w-10 border text-sm font-bold ${page === currentPage ? "border-(--maroon) bg-(--maroon) text-white" : "border-(--surface-line) bg-white"}`}
+                  onClick={() => goToPage(page)}
+                  type="button"
                 >
                   {page}
                 </button>
               ))}
             </div>
-            <button className="border border-(--surface-line) px-4 py-2 text-sm">Siguiente</button>
+            <button
+              className={`border border-(--surface-line) px-4 py-2 text-sm ${currentPage === totalPages ? "cursor-not-allowed text-slate-400" : "text-(--text-main)"}`}
+              disabled={currentPage === totalPages}
+              onClick={() => goToPage(currentPage + 1)}
+              type="button"
+            >
+              Siguiente
+            </button>
           </div>
         </section>
         <aside className="institutional-card overflow-hidden">
-          <div className="p-6">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-sm">Ticket Seleccionado</p>
-                <h2 className="brand-serif mt-1 text-2xl font-bold text-(--maroon)">{activeTicket.id}</h2>
+          <div className="p-6 relative">
+            <div className="absolute top-4 right-4">
+              <div className="relative">
+                <button
+                  type="button"
+                  aria-label="Información del reporte"
+                  onMouseEnter={() => setShowInfo(true)}
+                  onMouseLeave={() => setShowInfo(false)}
+                  onClick={() => setShowInfo((s) => !s)}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-(--surface-line) bg-white shadow-sm"
+                >
+                  <Icon name="info" />
+                </button>
+                <div
+                  className={`absolute right-0 z-50 mt-2 w-64 rounded border bg-white p-3 text-sm shadow-lg ${showInfo ? "block" : "hidden"}`}
+                  onMouseEnter={() => setShowInfo(true)}
+                  onMouseLeave={() => setShowInfo(false)}
+                >
+                  <p className="font-bold">Detalles del reporte</p>
+                  <div className="mt-2 space-y-1">
+                    {infoFields.length === 0 ? <p className="text-(--text-muted)">Sin información adicional</p> : null}
+                    {infoFields.map((f) => (
+                      <div key={f.label} className="flex justify-between">
+                        <span className="font-medium text-(--text-muted)">{f.label}</span>
+                        <span className="text-right">{String(f.value)}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <span className={`px-3 py-2 text-sm ${statusClass(activeTicket.status)}`}>{activeTicket.status}</span>
             </div>
-            <h3 className="mt-6 text-xl font-bold">{activeTicket.title}</h3>
+            <div className="mx-auto max-w-[520px]">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm">Ticket Seleccionado</p>
+                  <h2 className="brand-serif mt-1 text-2xl font-bold text-(--maroon)">{activeTicket.id}</h2>
+                </div>
+                <span className={`px-3 py-2 text-sm ${statusClass(activeTicket.status)}`}>{activeTicket.status}</span>
+              </div>
+              <h3 className="mt-6 text-xl font-bold">{activeTicket.title}</h3>
+            </div>
           </div>
           <div className="border-t-4 border-(--gold-light) p-6">
-            <h3 className="border-b border-(--surface-line) pb-3 text-lg font-bold">Descripción del Problema</h3>
-            <p className="mt-4 leading-7 text-(--text-muted)">{activeTicket.description}</p>
-            <div className="mt-6 grid grid-cols-2 gap-5 text-sm">
-              
-            </div>
-            <label className="mt-7 grid gap-2 text-sm font-bold">
-              Actualizar Estado
-              <select className="focus-ring h-11 border border-(--surface-line) px-3 font-normal" value={activeTicket.status} disabled>
-                <option>{activeTicket.status}</option>
-              </select>
-            </label>
-            <div className="mt-7 grid grid-cols-2 gap-3">
-              <Button variant="outline">Reasignar</Button>
-              <Button>Guardar Cambios</Button>
+            <div className="mx-auto max-w-[520px]">
+              <h3 className="border-b border-(--surface-line) pb-3 text-lg font-bold">Descripción del Problema</h3>
+              <p className="mt-4 leading-7 text-(--text-muted)">{activeTicket.description}</p>
+              <div className="mt-6 grid grid-cols-2 gap-5 text-sm" />
+              <label className="mt-7 grid gap-2 text-sm font-bold">
+                Actualizar Estado
+                <select
+                  className="focus-ring h-11 border border-(--surface-line) px-3 font-normal"
+                  onChange={(event) => setPendingStatus(event.target.value as TicketStatus)}
+                  value={pendingStatus}
+                >
+                  {statusOptions.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <div className="mt-7">
+                <Button onClick={handleSaveStatus} disabled={isSaving}>
+                  {isSaving ? "Guardando..." : "Guardar Cambios"}
+                </Button>
+              </div>
             </div>
           </div>
         </aside>
