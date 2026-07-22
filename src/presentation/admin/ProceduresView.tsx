@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { AdminInstitution, AdminProcedure, AdminProcedureRequirement } from "@/src/application/admin/getAdminProceduresModel";
 
@@ -13,8 +13,11 @@ type ProceduresViewProps = {
   institutions: AdminInstitution[];
   procedures: AdminProcedure[];
   createAction: ProcedureAction;
+  createInstitutionAction: ProcedureAction;
   updateAction: ProcedureAction;
+  updateInstitutionAction: ProcedureAction;
   deleteAction: ProcedureAction;
+  deleteInstitutionAction: ProcedureAction;
 };
 
 function keywordsText(keywords: string[]) {
@@ -170,13 +173,27 @@ export function ProceduresView({
   institutions,
   procedures,
   createAction,
+  createInstitutionAction,
   updateAction,
+  updateInstitutionAction,
   deleteAction,
+  deleteInstitutionAction,
 }: ProceduresViewProps) {
   const [requirementRows, setRequirementRows] = useState([{ id: 1 }]);
+  const [editingInstitutionId, setEditingInstitutionId] = useState<number | null>(null);
+  const [editingInstitutionName, setEditingInstitutionName] = useState("");
+
+  useEffect(() => {
+    setRequirementRows([{ id: 1 }]);
+  }, [procedures.length]);
 
   function addRequirementRow() {
     setRequirementRows((currentRows) => [...currentRows, { id: currentRows.length + 1 }]);
+  }
+
+  function startEditingInstitution(institution: AdminInstitution) {
+    setEditingInstitutionId(institution.institutionId);
+    setEditingInstitutionName(institution.name);
   }
 
   return (
@@ -193,6 +210,82 @@ export function ProceduresView({
           <span className="text-sm font-bold">{procedures.length} trámites registrados</span>
         </div>
       </div>
+
+      <section className="institutional-card gold-rule-top p-6">
+        <div className="flex flex-col gap-2 border-b border-(--surface-line) pb-5">
+          <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Nueva institución</h2>
+          <p className="text-sm text-(--text-muted)">Agrega una institución para asignarla a nuevos trámites.</p>
+        </div>
+        <form action={createInstitutionAction} className="mt-6 flex flex-col gap-4 md:flex-row md:items-end">
+          <label className="grid flex-1 gap-2 text-sm font-bold">
+            Nombre de la institución
+            <input
+              className="focus-ring h-11 border border-(--surface-line) px-3 font-normal"
+              name="name"
+              placeholder="Ej. Secretaría de Economía"
+              required
+            />
+          </label>
+          <Button type="submit" variant="secondary">
+            <Icon name="circlePlus" size={18} />
+            Agregar institución
+          </Button>
+        </form>
+      </section>
+
+      <section className="institutional-card gold-rule-top p-6">
+        <div className="flex flex-col gap-2 border-b border-(--surface-line) pb-5">
+          <h2 className="brand-serif text-2xl font-semibold text-(--maroon)">Instituciones registradas</h2>
+          <p className="text-sm text-(--text-muted)">Gestiona los registros disponibles para asignar trámites.</p>
+        </div>
+        <div className="mt-6 grid gap-3">
+          {institutions.map((institution) => (
+            <div key={institution.institutionId} className="flex flex-col gap-3 border border-(--surface-line) p-4 md:flex-row md:items-center md:justify-between">
+              {editingInstitutionId === institution.institutionId ? (
+                <form action={updateInstitutionAction} className="flex flex-1 flex-col gap-3 md:flex-row md:items-center">
+                  <input name="institution_id" type="hidden" value={institution.institutionId} />
+                  <input
+                    className="focus-ring h-11 flex-1 border border-(--surface-line) px-3 font-normal"
+                    name="name"
+                    onChange={(event) => setEditingInstitutionName(event.target.value)}
+                    required
+                    value={editingInstitutionName}
+                  />
+                  <div className="flex flex-wrap gap-2">
+                    <Button className="h-11" type="submit" variant="secondary">
+                      <Icon name="checkCircle" size={16} />
+                      Guardar
+                    </Button>
+                    <Button className="h-11" onClick={() => setEditingInstitutionId(null)} type="button" variant="outline">
+                      Cancelar
+                    </Button>
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <div>
+                    <p className="font-bold text-(--text-main)">{institution.name}</p>
+                    <p className="text-sm text-(--text-muted)">ID #{institution.institutionId}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Button className="h-11" onClick={() => startEditingInstitution(institution)} type="button" variant="outline">
+                      <Icon name="settings" size={16} />
+                      Editar
+                    </Button>
+                    <form action={deleteInstitutionAction}>
+                      <input name="institution_id" type="hidden" value={institution.institutionId} />
+                      <Button className="h-11 border-(--danger) bg-(--danger) hover:bg-[#93000a]" type="submit" variant="outline">
+                        <Icon name="trash" size={16} />
+                        Eliminar
+                      </Button>
+                    </form>
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
 
       <section className="institutional-card gold-rule-top p-6">
         <div className="flex flex-col gap-2 border-b border-(--surface-line) pb-5">

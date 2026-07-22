@@ -65,6 +65,74 @@ async function getSupabase() {
   return createClient(cookieStore);
 }
 
+export async function createInstitution(formData: FormData) {
+  const supabase = await getSupabase();
+  const { error } = await supabase.from("institutions").insert({
+    name: requiredString(formData, "name"),
+  });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath(proceduresPath);
+}
+
+export async function updateInstitution(formData: FormData) {
+  const supabase = await getSupabase();
+  const institutionId = requiredNumber(formData, "institution_id");
+  const { error } = await supabase
+    .from("institutions")
+    .update({
+      name: requiredString(formData, "name"),
+    })
+    .eq("institution_id", institutionId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath(proceduresPath);
+}
+
+export async function deleteInstitution(formData: FormData) {
+  const supabase = await getSupabase();
+  const institutionId = requiredNumber(formData, "institution_id");
+
+  const { data: procedures, error: proceduresError } = await supabase
+    .from("procedures")
+    .select("procedure_id")
+    .eq("institution_id", institutionId);
+
+  if (proceduresError) {
+    throw new Error(proceduresError.message);
+  }
+
+  const procedureIds = (procedures ?? []).map((procedure) => procedure.procedure_id);
+
+  if (procedureIds.length > 0) {
+    const { error: requirementsError } = await supabase.from("requirement_documents").delete().in("procedure_id", procedureIds);
+
+    if (requirementsError) {
+      throw new Error(requirementsError.message);
+    }
+
+    const { error: deleteProceduresError } = await supabase.from("procedures").delete().in("procedure_id", procedureIds);
+
+    if (deleteProceduresError) {
+      throw new Error(deleteProceduresError.message);
+    }
+  }
+
+  const { error } = await supabase.from("institutions").delete().eq("institution_id", institutionId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  revalidatePath(proceduresPath);
+}
+
 export async function createProcedure(formData: FormData) {
   const supabase = await getSupabase();
   const { data: procedure, error: procedureError } = await supabase
@@ -165,6 +233,13 @@ export async function updateProcedure(formData: FormData) {
 export async function deleteProcedure(formData: FormData) {
   const supabase = await getSupabase();
   const procedureId = requiredNumber(formData, "procedure_id");
+
+  const { error: requirementsError } = await supabase.from("requirement_documents").delete().eq("procedure_id", procedureId);
+
+  if (requirementsError) {
+    throw new Error(requirementsError.message);
+  }
+
   const { error } = await supabase.from("procedures").delete().eq("procedure_id", procedureId);
 
   if (error) {

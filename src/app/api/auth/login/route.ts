@@ -61,6 +61,24 @@ function signSession(admin: Admin) {
   return `${header}.${payload}.${signature}`;
 }
 
+async function passwordsMatch(password: string, storedHash: string) {
+  const normalizedHash = storedHash.trim();
+
+  if (!normalizedHash) {
+    return false;
+  }
+
+  if (normalizedHash.startsWith("$2")) {
+    try {
+      return await bcrypt.compare(password, normalizedHash);
+    } catch {
+      return false;
+    }
+  }
+
+  return password === normalizedHash;
+}
+
 export async function POST(request: NextRequest) {
   const body = await readJsonBody(request);
 
@@ -83,7 +101,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
 
-  const passwordMatches = await bcrypt.compare(body.password, admin.hash_password);
+  const passwordMatches = await passwordsMatch(body.password, admin.hash_password);
 
   if (!passwordMatches) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });

@@ -38,23 +38,7 @@ export function ProcedureDetailView({
                   <p className="mt-1 font-bold">{procedure.institutionName}</p>
                 </div>
               </div>
-              <dl className="mt-6 grid gap-4 text-sm">
-                <div className="flex items-start gap-3">
-                  <Icon name="banknote" className="mt-0.5 text-[#795926]" size={18} />
-                  <div>
-                    <dt className="font-bold">Costo</dt>
-                    <dd className="text-(--text-muted)">{procedure.cost}</dd>
-                  </div>
-                </div>
-                
-                <div className="flex items-start gap-3">
-                  <Icon name="clipboardCheck" className="mt-0.5 text-[#795926]" size={18} />
-                  <div>
-                    <dt className="font-bold">Modalidad</dt>
-                    <dd className="text-(--text-muted)">{procedure.modality}</dd>
-                  </div>
-                </div>
-              </dl>
+              
             </aside>
           </div>
         </div>

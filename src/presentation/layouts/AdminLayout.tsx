@@ -19,9 +19,6 @@ export function AdminLayout({
     <div className="min-h-screen bg-(--surface-muted) text-(--text-main)">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 flex-col border-r border-(--surface-line) bg-white md:flex">
         <div className="border-b border-(--surface-line) p-6 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border-2 border-(--maroon-strong) bg-(--maroon-strong) text-lg font-bold text-white">
-            UA
-          </div>
           <h2 className="brand-serif text-xl font-semibold text-(--maroon)">Panel INMIDOC</h2>
           <p className="mt-1 text-sm text-(--text-muted)">Administración Central</p>
         </div>
